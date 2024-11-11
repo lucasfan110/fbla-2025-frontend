@@ -1,0 +1,25 @@
+@import "../sass/abstracts/mixins";
+
+.navbar {
+    @include container;
+
+    display: flex;
+
+    &__item {
+        display: flex;
+        flex: 1 1 0px;
+        align-items: center;
+    }
+
+    &__justify-left {
+        justify-content: flex-start;
+    }
+
+    &__justify-center {
+        justify-content: center;
+    }
+
+    &__justify-right {
+        justify-content: flex-end;
+    }
+}
