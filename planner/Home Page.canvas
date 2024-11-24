@@ -1,0 +1,35 @@
+{
+	"nodes":[
+		{"id":"93c4f041e0a612b6","type":"text","text":"# Home Page","x":-171,"y":-129,"width":251,"height":69},
+		{"id":"662eac235da95eaa","type":"text","text":"Should have a navbar at the top","x":135,"y":30,"width":250,"height":60},
+		{"id":"2db6c3b6aeb98865","type":"text","text":"Next, it should have a main section introducing the app with a button to sign up and an image of relevance","x":235,"y":135,"width":250,"height":145},
+		{"id":"33041a46812e0835","type":"file","file":"planner/images/Pasted image 20241111223943.png","x":820,"y":158,"width":400,"height":122},
+		{"id":"8ec5833434623ec9","type":"text","text":"That'll be the main page for now, and we can add more later on","x":260,"y":340,"width":250,"height":103},
+		{"id":"504457d77c49c158","type":"text","text":"Create a new folder in the `src` directory called `Pages`.","x":-567,"y":28,"width":250,"height":107},
+		{"id":"6ef03869eab83e38","type":"text","text":"Create a new file inside the `Pages` folder called `IndexPage`","x":-600,"y":208,"width":250,"height":97},
+		{"id":"fd75ec10f608da9f","x":-616,"y":371,"width":250,"height":60,"type":"text","text":"Inside here, put all the HTML code."},
+		{"id":"8f8e8babe4cca552","x":-616,"y":460,"width":250,"height":60,"type":"text","text":"Style it to make it look nice as well"},
+		{"id":"84727449f688081a","x":-600,"y":580,"width":250,"height":90,"type":"text","text":"Then, create a new folder in the `src` directory called `Layouts`"},
+		{"id":"9c5b5bf040966015","x":-540,"y":740,"width":250,"height":98,"type":"text","text":"Inside the `Layouts` folder, add a file called `AppLayout`. "},
+		{"id":"94f4baa930df9d5f","x":-520,"y":900,"width":250,"height":100,"type":"text","text":"It should have the `Navbar` component in there"},
+		{"id":"b6b1934e413ee187","x":-520,"y":1078,"width":250,"height":82,"type":"text","text":"Create another file inside the `Layouts` folder, called `ContainerLayout`"},
+		{"id":"5c94967ab7b4ce70","x":-491,"y":1220,"width":250,"height":82,"type":"text","text":"It should just be a div with the style of the `container` mixin."},
+		{"id":"073b13c1d510c5f3","x":-456,"y":1357,"width":250,"height":83,"type":"text","text":"Use all these layouts in the `main.tsx` file, with React Router"}
+	],
+	"edges":[
+		{"id":"077fc33de2479dd7","fromNode":"93c4f041e0a612b6","fromSide":"bottom","toNode":"662eac235da95eaa","toSide":"top","label":"Ideas"},
+		{"id":"2a611b1a2bc91cb2","fromNode":"662eac235da95eaa","fromSide":"bottom","toNode":"2db6c3b6aeb98865","toSide":"top"},
+		{"id":"58a53294423e83a7","fromNode":"2db6c3b6aeb98865","fromSide":"right","toNode":"33041a46812e0835","toSide":"left","label":"Should look like this"},
+		{"id":"18842576ab9df714","fromNode":"2db6c3b6aeb98865","fromSide":"bottom","toNode":"8ec5833434623ec9","toSide":"top"},
+		{"id":"be6d9ed5a20f4a18","fromNode":"93c4f041e0a612b6","fromSide":"bottom","toNode":"504457d77c49c158","toSide":"top","label":"How to code it"},
+		{"id":"591d12082f50dbe6","fromNode":"504457d77c49c158","fromSide":"bottom","toNode":"6ef03869eab83e38","toSide":"top"},
+		{"id":"749caff21b93683f","fromNode":"6ef03869eab83e38","fromSide":"bottom","toNode":"fd75ec10f608da9f","toSide":"top"},
+		{"id":"83b167cecc1a4504","fromNode":"fd75ec10f608da9f","fromSide":"bottom","toNode":"8f8e8babe4cca552","toSide":"top"},
+		{"id":"28749fe21a0e1dd9","fromNode":"8f8e8babe4cca552","fromSide":"bottom","toNode":"84727449f688081a","toSide":"top"},
+		{"id":"5d1764344ba93e5a","fromNode":"84727449f688081a","fromSide":"bottom","toNode":"9c5b5bf040966015","toSide":"top"},
+		{"id":"e91208ab27945b5f","fromNode":"9c5b5bf040966015","fromSide":"bottom","toNode":"94f4baa930df9d5f","toSide":"top"},
+		{"id":"834676c295178322","fromNode":"94f4baa930df9d5f","fromSide":"bottom","toNode":"b6b1934e413ee187","toSide":"top"},
+		{"id":"5e69d710fb55b9ef","fromNode":"b6b1934e413ee187","fromSide":"bottom","toNode":"5c94967ab7b4ce70","toSide":"top"},
+		{"id":"d5fea7f4ab6af6c6","fromNode":"5c94967ab7b4ce70","fromSide":"bottom","toNode":"073b13c1d510c5f3","toSide":"top"}
+	]
+}

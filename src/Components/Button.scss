@@ -1,0 +1,37 @@
+@use "../sass/abstracts/variables";
+
+.button {
+    background: none;
+    border: none;
+    font-size: inherit;
+    color: inherit;
+    font-family: inherit;
+    cursor: pointer;
+    padding: 1.2rem 1.4rem;
+    border-radius: 6px;
+    transition: all 0.2s;
+    text-decoration: none;
+
+    &:hover {
+        background-color: variables.$color-gray-light;
+    }
+
+    &:disabled {
+        background-color: variables.$color-gray-2;
+        cursor: default;
+
+        &:hover {
+            background-color: variables.$color-gray-2;
+        }
+    }
+
+    &--primary {
+        background-color: variables.$color-primary;
+        color: variables.$color-white;
+        box-shadow: 0 1rem 4rem variables.$color-box-shadow;
+
+        &:hover {
+            background-color: variables.$color-primary-dark;
+        }
+    }
+}

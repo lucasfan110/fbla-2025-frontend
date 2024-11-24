@@ -1,6 +1,6 @@
-@import "../abstracts/variables";
+@use "../abstracts/variables";
 
 @mixin container {
-    max-width: $container-width;
+    max-width: variables.$container-width;
     margin: 0 auto;
 }

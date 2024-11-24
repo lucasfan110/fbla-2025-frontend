@@ -1,0 +1,21 @@
+{
+	"nodes":[
+		{"id":"4e6137cb8a62232b","type":"text","text":"The one aligned left should be our logo, the one aligned in the middle should be a search bar, and the one aligned to the right should be log in/sign up. Maybe I'll add a option to change language as well","x":-287,"y":120,"width":380,"height":160},
+		{"id":"0bdfbee4b73c0bf7","type":"link","url":"https://www.meetup.com/","x":480,"y":0,"width":580,"height":400},
+		{"id":"d011f846701e6847","type":"text","text":"Creating a navbar","x":-620,"y":-200,"width":250,"height":60},
+		{"id":"7977d437b61480cc","type":"text","text":"First of all, the navbar should be split into three parts, where one is aligned left, one aligned middle, and one aligned right. ","x":-370,"y":-90,"width":345,"height":120},
+		{"id":"d5b7b9a3e304f136","type":"text","text":"Make the navbar `display: flex`","x":-840,"y":-30,"width":250,"height":60},
+		{"id":"c33502c37107a656","x":-840,"y":200,"width":250,"height":60,"type":"text","text":"Add three divs inside the `navbar` component"},
+		{"id":"525d469b27046c09","x":-840,"y":300,"width":250,"height":100,"type":"text","text":"Each of the component represents the three parts, aligned from left to right"},
+		{"id":"5b2b2e64cd963f5b","x":-840,"y":90,"width":250,"height":60,"type":"text","text":"Use `justify-content: space-between`"}
+	],
+	"edges":[
+		{"id":"aa5ebdad3c4383c3","fromNode":"d011f846701e6847","fromSide":"bottom","toNode":"7977d437b61480cc","toSide":"top","label":"Ideas"},
+		{"id":"797c4222d9e1beb7","fromNode":"7977d437b61480cc","fromSide":"bottom","toNode":"4e6137cb8a62232b","toSide":"top"},
+		{"id":"e1080b97bb3e2130","fromNode":"4e6137cb8a62232b","fromSide":"right","toNode":"0bdfbee4b73c0bf7","toSide":"left","label":"should be based on this"},
+		{"id":"601c0d0e8954d761","fromNode":"d011f846701e6847","fromSide":"bottom","toNode":"d5b7b9a3e304f136","toSide":"top","label":"How to code it"},
+		{"id":"7cd29b2cb4155f0d","fromNode":"d5b7b9a3e304f136","fromSide":"bottom","toNode":"5b2b2e64cd963f5b","toSide":"top"},
+		{"id":"3b1dd5d51a80172c","fromNode":"5b2b2e64cd963f5b","fromSide":"bottom","toNode":"c33502c37107a656","toSide":"top"},
+		{"id":"c39b1966f19b19da","fromNode":"c33502c37107a656","fromSide":"bottom","toNode":"525d469b27046c09","toSide":"top"}
+	]
+}

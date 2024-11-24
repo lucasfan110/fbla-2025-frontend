@@ -1,4 +1,20 @@
-$color-black: #000;
+$color-white: #fff;
+
+$color-gray-1: #3b506c;
+$color-gray-2: #666666;
+$color-gray-3: #aaaaaa;
+$color-gray-light: #f0f0f0;
+$color-gray-lighter: #f8f8f8;
+$color-gray-dark: #333333;
+
+$color-black: #161c2d;
+
+$color-primary: #00008b;
+$color-primary-dark: darken($color-primary, 10%);
+
+$color-box-shadow-dark: rgba($color-black, 0.4);
+$color-box-shadow: rgba($color-black, 0.2);
+$color-box-shadow-light: rgba($color-black, 0.1);
 
 $container-width: 104rem;
 

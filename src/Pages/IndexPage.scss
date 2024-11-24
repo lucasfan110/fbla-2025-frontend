@@ -1,0 +1,29 @@
+.index-page {
+    &__introduction {
+        display: flex;
+        margin: 5rem 0;
+        gap: 2rem;
+
+        h2 {
+            font-weight: bold;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
+
+        div {
+            flex: 1 1 0px;
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+
+    &__text-intro {
+        align-self: center;
+    }
+
+    &__get-started-btn {
+        margin-top: 2rem;
+    }
+}

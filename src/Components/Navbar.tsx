@@ -1,3 +1,4 @@
+import Button from "./Button";
 import "./Navbar.scss";
 
 export default function Navbar() {
@@ -6,12 +7,10 @@ export default function Navbar() {
             <div className="navbar__item navbar__justify-left">
                 FBLA 2025 Website Coding & Development Project
             </div>
-            <div className="navbar__item navbar__justify-center">
-                <input></input>
-            </div>
+            <div className="navbar__item navbar__justify-center"></div>
             <div className="navbar__item navbar__justify-right">
-                <button>Log In</button>
-                <button>Sign Up</button>
+                <Button>Log In</Button>
+                <Button variation="primary">Sign Up</Button>
             </div>
         </nav>
     );
