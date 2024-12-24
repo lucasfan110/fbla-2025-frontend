@@ -9,19 +9,21 @@ import "./index.scss";
 import AppLayout from "./Layouts/AppLayout.tsx";
 import IndexPage from "./Pages/IndexPage.tsx";
 import ContainerLayout from "./Layouts/ContainerLayout.tsx";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const router = createHashRouter(
     createRoutesFromElements(
         <>
             <Route path="/" element={<AppLayout />}>
-                <Route element={<ContainerLayout />}>
-                    <Route index element={<IndexPage />} />
-                </Route>
+                <Route index element={<IndexPage />} />
+                <Route element={<ContainerLayout />}></Route>
             </Route>
         </>
     )
 );
 
 createRoot(document.getElementById("root")!).render(
-    <RouterProvider router={router} />
+    <GoogleOAuthProvider clientId="787597170145-sukbvh7o7pj8bkeru9mego4ub3n9e86t.apps.googleusercontent.com">
+        <RouterProvider router={router} />
+    </GoogleOAuthProvider>
 );

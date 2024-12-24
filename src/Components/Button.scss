@@ -34,4 +34,24 @@
             background-color: variables.$color-primary-dark;
         }
     }
+
+    &--secondary {
+        background-color: variables.$color-secondary;
+        color: variables.$color-white;
+        box-shadow: 0 1rem 4rem variables.$color-box-shadow;
+
+        &:hover {
+            background-color: variables.$color-secondary-dark;
+        }
+    }
+
+    &--link {
+        padding: 0;
+        color: variables.$color-primary;
+        text-decoration: underline;
+
+        &:hover {
+            background-color: initial;
+        }
+    }
 }

@@ -1,3 +1,5 @@
+@use "sass:color";
+
 $color-white: #fff;
 
 $color-gray-1: #3b506c;
@@ -10,7 +12,15 @@ $color-gray-dark: #333333;
 $color-black: #161c2d;
 
 $color-primary: #00008b;
-$color-primary-dark: darken($color-primary, 10%);
+$color-primary-dark: color.adjust($color-primary, $blackness: 10%);
+$color-primary-light: color.adjust($color-primary, $lightness: 10%);
+$color-primary-logo: color.adjust($color-primary, $lightness: 50%);
+
+$color-secondary: #ff6600;
+$color-secondary-dark: color.adjust($color-secondary, $blackness: 10%);
+$color-secondary-light: color.adjust($color-secondary, $lightness: 10%);
+
+$color-invalid: red;
 
 $color-box-shadow-dark: rgba($color-black, 0.4);
 $color-box-shadow: rgba($color-black, 0.2);

@@ -1,0 +1,48 @@
+@use "../sass/abstracts/variables";
+
+.log-in-page {
+    &__title {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    &__form {
+        margin-top: 2rem;
+    }
+
+    &__input {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    &__submit {
+        width: 100%;
+        margin-top: 2rem;
+    }
+
+    &__no-account {
+        margin-top: 1rem;
+        text-align: left;
+    }
+
+    &__separator {
+        color: variables.$color-gray-2;
+        margin-top: 2rem;
+    }
+
+    &__google-log-in-button {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-top: 2rem;
+
+        i {
+            font-size: 2rem;
+        }
+
+        p {
+            text-align: center;
+            width: 100%;
+        }
+    }
+}

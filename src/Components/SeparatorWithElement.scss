@@ -1,0 +1,14 @@
+@use "../sass/abstracts/variables";
+
+.separator-with-element {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    &__line {
+        border: 1px solid variables.$color-gray-light;
+        border-top-width: 0px;
+        flex-grow: 1;
+        height: 0px;
+    }
+}

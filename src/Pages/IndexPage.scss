@@ -1,21 +1,34 @@
+@use "../sass/abstracts/variables";
+@use "../sass/abstracts/mixins";
+
 .index-page {
-    &__introduction {
+    &__split {
         display: flex;
-        margin: 5rem 0;
         gap: 2rem;
+    }
+
+    &__title {
+        font-weight: bold;
+        font-size: 4rem;
+    }
+
+    &__split-container {
+        flex: 1 1 0px;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    &__introduction {
+        @include mixins.container;
+        margin-top: 5rem;
+        margin-bottom: 10rem;
 
         h2 {
             font-weight: bold;
             line-height: 1.2;
             margin-bottom: 2rem;
-        }
-
-        div {
-            flex: 1 1 0px;
-        }
-
-        img {
-            width: 100%;
         }
     }
 
@@ -25,5 +38,23 @@
 
     &__get-started-btn {
         margin-top: 2rem;
+    }
+
+    &__details {
+        background-color: variables.$color-primary;
+        color: variables.$color-white;
+        padding: 5rem 0;
+
+        h2 {
+            text-align: center;
+        }
+    }
+
+    &__details-container {
+        @include mixins.container;
+    }
+
+    &__details-row-1 {
+        margin: 5rem 0;
     }
 }

@@ -1,0 +1,6 @@
+@use "../sass/abstracts/variables";
+
+.error-text {
+    color: variables.$color-invalid;
+    margin-bottom: 1rem;
+}

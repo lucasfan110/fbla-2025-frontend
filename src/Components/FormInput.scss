@@ -1,0 +1,19 @@
+@use "../sass/abstracts/variables";
+
+.form-input {
+    margin-bottom: 1rem;
+
+    &__input {
+        margin-top: 0.5rem;
+    }
+
+    &__label {
+        font-weight: bold;
+    }
+
+    &__invalid-message,
+    &__required {
+        color: variables.$color-invalid;
+        font-size: variables.$font-size-small;
+    }
+}
