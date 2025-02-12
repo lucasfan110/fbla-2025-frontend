@@ -1,0 +1,19 @@
+@use "../sass/abstracts/variables";
+
+.dropdown {
+    margin-bottom: 2rem;
+
+    &__label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    &__select {
+        width: 100%;
+        padding: 1rem;
+        border-radius: 5px;
+        border: 1px solid variables.$color-black;
+        background-color: variables.$color-white;
+    }
+}

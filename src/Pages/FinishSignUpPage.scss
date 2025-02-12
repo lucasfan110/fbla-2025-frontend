@@ -1,0 +1,39 @@
+@use "../sass/abstracts/variables";
+
+.finish-sign-up-page {
+    &__container {
+        margin: 10rem auto;
+        max-width: 60rem;
+        border: 1px solid variables.$color-gray-2;
+        border-radius: 1rem;
+        padding: 3rem 0;
+    }
+
+    &__header {
+        padding-bottom: 3rem;
+        border-bottom: 1px solid variables.$color-gray-3;
+    }
+
+    &__title {
+        text-align: center;
+    }
+
+    &__body {
+        padding: 3rem;
+    }
+
+    &__submit-button {
+        margin-top: 2rem;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .finish-sign-up-page {
+        &__container {
+            border: none;
+            border-radius: 1rem;
+            margin: 0;
+        }
+    }
+}

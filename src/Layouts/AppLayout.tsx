@@ -1,5 +1,5 @@
 import { Outlet, ScrollRestoration } from "react-router-dom";
-import Navbar from "../Components/Navbar";
+import Navbar from "../components/Navbar";
 
 interface Props {
     children?: React.ReactNode;

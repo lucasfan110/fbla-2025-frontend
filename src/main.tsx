@@ -6,10 +6,11 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import "./index.scss";
-import AppLayout from "./Layouts/AppLayout.tsx";
-import IndexPage from "./Pages/IndexPage.tsx";
-import ContainerLayout from "./Layouts/ContainerLayout.tsx";
+import AppLayout from "./layouts/AppLayout.tsx";
+import IndexPage from "./pages/IndexPage.tsx";
+import ContainerLayout from "./layouts/ContainerLayout.tsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import FinishSignUpPage from "./pages/FinishSignUpPage.tsx";
 
 const router = createHashRouter(
     createRoutesFromElements(
@@ -18,6 +19,8 @@ const router = createHashRouter(
                 <Route index element={<IndexPage />} />
                 <Route element={<ContainerLayout />}></Route>
             </Route>
+
+            <Route path="/finish-sign-up" element={<FinishSignUpPage />} />
         </>
     )
 );

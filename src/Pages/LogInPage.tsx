@@ -1,91 +1,115 @@
-import { useState } from "react";
-import FormInput from "../Components/FormInput";
-import "./LogInPage.scss";
-import validator from "validator";
-import Button from "../Components/Button";
-import SeparatorWithElement from "../Components/SeparatorWithElement";
 import { TokenResponse, useGoogleLogin } from "@react-oauth/google";
-import { BACKEND_SERVER_ADDRESS } from "../Utils/constants";
-import ErrorText from "../Components/ErrorText";
+import { useReducer } from "react";
+import validator from "validator";
+import Button from "../components/Button";
+import ErrorText from "../components/ErrorText";
+import FormInput from "../components/FormInput";
+import SeparatorWithElement from "../components/SeparatorWithElement";
+import "./LogInPage.scss";
+import backend from "../api/backend";
 
-export type LogInFormData = {
+interface State {
     email: string;
     password: string;
-};
+    errorElement: React.ReactNode;
+}
 
-const INITIAL_FORM_DATA: LogInFormData = {
-    email: "",
-    password: "",
-};
+const INITIAL_STATE: State = { email: "", password: "", errorElement: null };
+
+type Action =
+    | { type: "changeEmail"; payload: string }
+    | { type: "changePassword"; payload: string }
+    | { type: "setError"; payload: React.ReactNode }
+    | { type: "resetError" };
+
+function reducer(state: State, action: Action): State {
+    switch (action.type) {
+        case "changeEmail":
+            return { ...state, email: action.payload };
+        case "changePassword":
+            return { ...state, password: action.payload };
+        case "setError":
+            return { ...state, errorElement: action.payload };
+        case "resetError":
+            return { ...state, errorElement: null };
+        default:
+            throw new Error("Unhandled action type");
+    }
+}
 
 interface Props {
     goToSignUp: () => void;
 }
 
 export default function LogInPage({ goToSignUp }: Props) {
-    const [formData, setFormData] = useState(INITIAL_FORM_DATA);
-    const [errorElement, setErrorElement] = useState<React.ReactNode>(null);
+    const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+    const { email, password, errorElement } = state;
 
     const login = useGoogleLogin({
         onSuccess: onGoogleLogin,
         onError: () =>
-            setErrorElement(
-                <>Failed to log in with Google! Please try again later!</>
-            ),
+            dispatch({
+                type: "setError",
+                payload: (
+                    <>Failed to log in with Google! Please try again later!</>
+                ),
+            }),
     });
 
     async function onGoogleLogin(response: TokenResponse) {
-        const res = await fetch(
-            `${BACKEND_SERVER_ADDRESS}/api/v1/users/google-auth/login`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    token: response.access_token,
-                }),
-            }
+        const res = await backend.post(
+            "/users/google-auth/login",
+            JSON.stringify({ token: response.access_token })
         );
 
-        const json = await res.json();
+        const { status, token } = res.data;
 
-        if (json.status === "success") {
-            localStorage.setItem("jwt", json.token);
+        if (status === "success") {
+            localStorage.setItem("jwt", token);
+            onLoginSuccess();
         } else {
-            setErrorElement(
-                <>
-                    User didn't sign up with this gmail account!{" "}
-                    <Button variation="link" type="button" onClick={goToSignUp}>
-                        Sign up
-                    </Button>{" "}
-                    instead please!
-                </>
-            );
+            dispatch({
+                type: "setError",
+                payload: (
+                    <>
+                        User didn't sign up with this gmail account!{" "}
+                        <Button
+                            variation="link"
+                            type="button"
+                            onClick={goToSignUp}
+                        >
+                            Sign up
+                        </Button>{" "}
+                        instead please!
+                    </>
+                ),
+            });
         }
     }
 
     async function onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        const res = await fetch(
-            `${BACKEND_SERVER_ADDRESS}/api/v1/users/login`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
-            }
+        const res = await backend.post(
+            "/users/login",
+            JSON.stringify({ email, password })
         );
 
-        const json = await res.json();
+        const { status, token } = res.data;
 
-        if (json.status === "success") {
-            localStorage.setItem("jwt", json.token);
+        if (status === "success") {
+            localStorage.setItem("jwt", token);
+            onLoginSuccess();
         } else {
-            setErrorElement(<>Email or password incorrect!</>);
+            dispatch({
+                type: "setError",
+                payload: <>Email or password incorrect!</>,
+            });
         }
+    }
+
+    function onLoginSuccess() {
+        location.reload();
     }
 
     return (
@@ -100,7 +124,7 @@ export default function LogInPage({ goToSignUp }: Props) {
                     id="email"
                     name="email"
                     type="email"
-                    className="log-in-page__input"
+                    className="log-in-page__form-input"
                     required
                     validate={[
                         {
@@ -108,13 +132,13 @@ export default function LogInPage({ goToSignUp }: Props) {
                             invalidMessage: "Please put in a valid email",
                         },
                     ]}
-                    value={formData.email}
+                    value={email}
                     onChange={e => {
-                        setErrorElement(null);
-                        setFormData(data => ({
-                            ...data,
-                            email: e.target.value,
-                        }));
+                        dispatch({
+                            type: "changeEmail",
+                            payload: e.target.value,
+                        });
+                        dispatch({ type: "resetError" });
                     }}
                 />
 
@@ -124,15 +148,15 @@ export default function LogInPage({ goToSignUp }: Props) {
                     id="password"
                     name="password"
                     type="password"
-                    className="log-in-page__input"
+                    className="log-in-page__form-input"
                     required
-                    value={formData.password}
+                    value={password}
                     onChange={e => {
-                        setErrorElement(null);
-                        setFormData(data => ({
-                            ...data,
-                            password: e.target.value,
-                        }));
+                        dispatch({
+                            type: "changePassword",
+                            payload: e.target.value,
+                        });
+                        dispatch({ type: "resetError" });
                     }}
                 />
 
@@ -145,7 +169,7 @@ export default function LogInPage({ goToSignUp }: Props) {
                 </Button>
 
                 <p className="log-in-page__no-account">
-                    Don't have an account?&nbsp;
+                    Don't have an account?{" "}
                     <Button variation="link" type="button" onClick={goToSignUp}>
                         Sign up
                     </Button>

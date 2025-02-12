@@ -1,0 +1,27 @@
+@use "../sass/abstracts/variables";
+
+.school-form {
+    &__title {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    &__description {
+        font-size: variables.$font-size-small;
+        text-align: center;
+        color: variables.$color-gray-3;
+    }
+
+    &__header {
+        margin-top: 4rem;
+        margin-bottom: 1rem;
+    }
+
+    &__form-input {
+        input {
+            width: 100%;
+        }
+
+        margin-bottom: 2rem;
+    }
+}

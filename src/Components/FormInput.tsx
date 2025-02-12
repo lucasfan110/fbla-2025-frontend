@@ -3,10 +3,10 @@ import { ChangeEventHandler, useState } from "react";
 import "./FormInput.scss";
 import Input, { InputProps } from "./Input";
 
-type Validate = {
+interface Validate {
     validator: (value: string) => boolean;
     invalidMessage: string;
-};
+}
 
 export interface FormInputProps extends InputProps {
     label: string;
@@ -57,7 +57,7 @@ export default function FormInput({
     }
 
     return (
-        <div className="form-input">
+        <div className={classNames("form-input", className)}>
             <label htmlFor={props.id} className="form-input__label">
                 {label}
                 {props.required && (
@@ -65,7 +65,7 @@ export default function FormInput({
                 )}
             </label>
             <Input
-                className={classNames("form-input__input", className)}
+                className="form-input__input"
                 onChange={handleInputChange}
                 {...props}
             />

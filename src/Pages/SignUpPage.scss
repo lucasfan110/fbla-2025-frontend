@@ -1,0 +1,29 @@
+@use "../sass/abstracts/variables";
+
+.sign-up-page {
+    &__title {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    &__google-sign-up-button {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-top: 2rem;
+
+        i {
+            font-size: 2rem;
+        }
+
+        p {
+            text-align: center;
+            width: 100%;
+        }
+    }
+
+    &__already-member {
+        margin-top: 1rem;
+        text-align: left;
+    }
+}

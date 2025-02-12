@@ -1,0 +1,37 @@
+@use "../sass/abstracts/variables";
+
+.resource-card {
+    background-color: variables.$color-gray-light;
+    border-radius: 6px;
+    padding: 1rem 2rem;
+    position: relative;
+
+    &__link {
+        color: variables.$color-primary;
+    }
+
+    &__delete {
+        position: absolute;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+    }
+}
+
+.resource-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    &__input-container {
+        input {
+            width: 100%;
+        }
+    }
+
+    &__error-message {
+        font-size: variables.$font-size-small;
+        margin: 0;
+    }
+}
