@@ -1,77 +1,55 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import ReactModal from "react-modal";
 import modalStyle from "../constants/modalStyle";
 import LogInPage from "../pages/LogInPage";
 import SignUpPage from "../pages/SignUpPage";
 import "./AuthenticationModals.scss";
 import Button from "./Button";
+import { UserAuthFormContext } from "../context/UserAuthFormContext";
 
-interface Props {
-    logInModalOpen: boolean;
-    setLogInModalOpen: (value: boolean) => void;
-    signUpModalOpen: boolean;
-    setSignUpModalOpen: (value: boolean) => void;
-}
+export default function AuthenticationModals() {
+    const {
+        state: { activeModal },
+        closeModal,
+    } = useContext(UserAuthFormContext);
 
-export default function AuthenticationModals({
-    logInModalOpen,
-    setLogInModalOpen,
-    signUpModalOpen,
-    setSignUpModalOpen,
-}: Props) {
     useEffect(() => {
         let overflow;
 
-        if (logInModalOpen || signUpModalOpen) {
+        if (activeModal !== "none") {
             overflow = "hidden";
         } else {
             overflow = "visible";
         }
 
         document.body.style.overflowY = overflow;
-    }, [logInModalOpen, signUpModalOpen]);
+    }, [activeModal]);
 
     return (
         <>
             <ReactModal
-                isOpen={logInModalOpen}
+                isOpen={activeModal === "logIn"}
                 contentLabel="Log In Modal"
                 style={modalStyle}
-                onRequestClose={() => setLogInModalOpen(false)}
+                onRequestClose={closeModal}
                 shouldCloseOnOverlayClick={true}
             >
-                <Button
-                    onClick={() => setLogInModalOpen(false)}
-                    className="modal-close-button"
-                >
+                <Button onClick={closeModal} className="modal-close-button">
                     <i className="bi bi-x-lg modal-close-button__icon" />
                 </Button>
-                <LogInPage
-                    goToSignUp={() => {
-                        setLogInModalOpen(false);
-                        setSignUpModalOpen(true);
-                    }}
-                />
+                <LogInPage />
             </ReactModal>
             <ReactModal
-                isOpen={signUpModalOpen}
+                isOpen={activeModal === "signUp"}
                 contentLabel="Sign Up Modal"
                 style={modalStyle}
-                onRequestClose={() => setSignUpModalOpen(false)}
+                onRequestClose={closeModal}
                 shouldCloseOnOverlayClick={true}
             >
-                <Button
-                    onClick={() => setSignUpModalOpen(false)}
-                    className="modal-close-button"
-                >
+                <Button onClick={closeModal} className="modal-close-button">
                     <i className="bi bi-x-lg modal-close-button__icon" />
                 </Button>
-                <SignUpPage
-                    goToLogIn={() => {
-                        setSignUpModalOpen(false);
-                        setLogInModalOpen(true);
-                    }}
-                />
+                <SignUpPage />
             </ReactModal>
         </>
     );

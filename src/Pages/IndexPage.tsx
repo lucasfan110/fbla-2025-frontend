@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import Button from "../components/Button";
 import "./IndexPage.scss";
+import { UserAuthFormContext } from "../context/UserAuthFormContext";
 
 export default function IndexPage() {
+    const { openSignUpModal } = useContext(UserAuthFormContext);
+
     return (
         <main className="index-page">
             <section className="index-page__introduction index-page__split">
@@ -17,6 +21,7 @@ export default function IndexPage() {
                     <Button
                         variation="primary"
                         className="index-page__get-started-btn"
+                        onClick={openSignUpModal}
                     >
                         Get Started
                     </Button>

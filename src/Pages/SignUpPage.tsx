@@ -1,14 +1,12 @@
 import { TokenResponse, useGoogleLogin } from "@react-oauth/google";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from "../components/Button";
 import ErrorText from "../components/ErrorText";
 import "./SignUpPage.scss";
+import { UserAuthFormContext } from "../context/UserAuthFormContext";
 
-interface Props {
-    goToLogIn: () => void;
-}
-
-export default function SignUpPage({ goToLogIn }: Props) {
+export default function SignUpPage() {
+    const { openLogInModal } = useContext(UserAuthFormContext);
     const [errorElement, setErrorElement] = useState<React.ReactNode>(null);
 
     const signup = useGoogleLogin({
@@ -93,7 +91,7 @@ export default function SignUpPage({ goToLogIn }: Props) {
 
             <p className="sign-up-page__already-member">
                 Already a member?{" "}
-                <Button variation="link" type="button" onClick={goToLogIn}>
+                <Button variation="link" type="button" onClick={openLogInModal}>
                     Log in
                 </Button>
             </p>

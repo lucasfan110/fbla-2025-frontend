@@ -1,12 +1,13 @@
 import { TokenResponse, useGoogleLogin } from "@react-oauth/google";
-import { useReducer } from "react";
+import { useContext, useReducer } from "react";
 import validator from "validator";
+import backend from "../api/backend";
 import Button from "../components/Button";
 import ErrorText from "../components/ErrorText";
 import FormInput from "../components/FormInput";
 import SeparatorWithElement from "../components/SeparatorWithElement";
+import { UserAuthFormContext } from "../context/UserAuthFormContext";
 import "./LogInPage.scss";
-import backend from "../api/backend";
 
 interface State {
     email: string;
@@ -37,11 +38,8 @@ function reducer(state: State, action: Action): State {
     }
 }
 
-interface Props {
-    goToSignUp: () => void;
-}
-
-export default function LogInPage({ goToSignUp }: Props) {
+export default function LogInPage() {
+    const { openSignUpModal } = useContext(UserAuthFormContext);
     const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
     const { email, password, errorElement } = state;
 
@@ -76,7 +74,7 @@ export default function LogInPage({ goToSignUp }: Props) {
                         <Button
                             variation="link"
                             type="button"
-                            onClick={goToSignUp}
+                            onClick={openSignUpModal}
                         >
                             Sign up
                         </Button>{" "}
@@ -170,7 +168,11 @@ export default function LogInPage({ goToSignUp }: Props) {
 
                 <p className="log-in-page__no-account">
                     Don't have an account?{" "}
-                    <Button variation="link" type="button" onClick={goToSignUp}>
+                    <Button
+                        variation="link"
+                        type="button"
+                        onClick={openSignUpModal}
+                    >
                         Sign up
                     </Button>
                 </p>

@@ -1,20 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import backend from "../api/backend";
 import User from "../types/User";
 import Button from "./Button";
 import "./UserAuthentication.scss";
 import UserProfile from "./UserProfile";
+import { UserAuthFormContext } from "../context/UserAuthFormContext";
 
-interface Props {
-    setLogInModalOpen: (value: boolean) => void;
-    setSignUpModalOpen: (value: boolean) => void;
-}
-
-export default function UserAuthentication({
-    setLogInModalOpen,
-    setSignUpModalOpen,
-}: Props) {
+export default function UserAuthentication() {
     const [user, setUser] = useState<User | null>(null);
+
+    const { openLogInModal, openSignUpModal } = useContext(UserAuthFormContext);
 
     useEffect(() => {
         (async () => {
@@ -39,11 +34,8 @@ export default function UserAuthentication({
     if (!user) {
         return (
             <div className="user-authentication">
-                <Button onClick={() => setLogInModalOpen(true)}>Log In</Button>
-                <Button
-                    variation="primary"
-                    onClick={() => setSignUpModalOpen(true)}
-                >
+                <Button onClick={openLogInModal}>Log In</Button>
+                <Button variation="primary" onClick={openSignUpModal}>
                     Sign Up
                 </Button>
             </div>

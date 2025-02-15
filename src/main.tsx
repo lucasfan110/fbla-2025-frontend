@@ -11,6 +11,7 @@ import IndexPage from "./pages/IndexPage.tsx";
 import ContainerLayout from "./layouts/ContainerLayout.tsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import FinishSignUpPage from "./pages/FinishSignUpPage.tsx";
+import { UserAuthFormProvider } from "./context/UserAuthFormContext.ts";
 
 const router = createHashRouter(
     createRoutesFromElements(
@@ -27,6 +28,8 @@ const router = createHashRouter(
 
 createRoot(document.getElementById("root")!).render(
     <GoogleOAuthProvider clientId="787597170145-sukbvh7o7pj8bkeru9mego4ub3n9e86t.apps.googleusercontent.com">
-        <RouterProvider router={router} />
+        <UserAuthFormProvider>
+            <RouterProvider router={router} />
+        </UserAuthFormProvider>
     </GoogleOAuthProvider>
 );
