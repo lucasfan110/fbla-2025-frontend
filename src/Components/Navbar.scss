@@ -13,6 +13,11 @@
         align-items: center;
     }
 
+    &__logo-btn {
+        // padding: 3px 1.5rem;
+        padding: 0;
+    }
+
     &__justify-left {
         justify-content: flex-start;
         font-size: 3rem;
@@ -21,7 +26,7 @@
     &__logo {
         cursor: pointer;
         transition: all 0.4s;
-        padding: 3px 1.5rem;
+        padding: 8px 2rem;
         border-radius: 5px;
 
         &:hover {

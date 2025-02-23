@@ -3,11 +3,11 @@ import Button from "./Button";
 import Input from "./Input";
 import "./ResourceEditor.scss";
 import { Link } from "react-router-dom";
-import { SchoolResource } from "./SchoolForm";
 import ErrorText from "./ErrorText";
+import { Resource } from "../types/Resource";
 
-interface ResourceCardProps extends SchoolResource {
-    onDelete: (resource: SchoolResource) => void;
+interface ResourceCardProps extends Resource {
+    onDelete: (resource: Resource) => void;
 }
 
 function ResourceCard({ name, link, onDelete }: ResourceCardProps) {
@@ -29,8 +29,8 @@ function ResourceCard({ name, link, onDelete }: ResourceCardProps) {
 }
 
 type ResourceEditorProps = {
-    resources: SchoolResource[];
-    setResources: (resources: SchoolResource[]) => void;
+    resources: Resource[];
+    setResources: (resources: Resource[]) => void;
 };
 
 export default function ResourceEditor({

@@ -1,0 +1,21 @@
+@use "../sass/abstracts/variables";
+
+.text-area {
+    display: block;
+    font-size: variables.$font-size-small;
+    font-family: inherit;
+    padding: 0.8rem 1.2rem;
+    border: 1px solid variables.$color-gray-1;
+    border-radius: 5px;
+    transition: 0.2s;
+    resize: vertical; // Allows the textarea to be resized vertically
+    width: 100%; // Ensures the textarea takes up full width
+
+    &:focus {
+        outline: none;
+    }
+
+    &:not(:last-of-type) {
+        margin-bottom: 2rem;
+    }
+}

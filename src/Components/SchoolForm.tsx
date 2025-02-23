@@ -2,11 +2,7 @@ import validator from "validator";
 import FormInput from "./FormInput";
 import "./SchoolForm.scss";
 import ResourceEditor from "./ResourceEditor";
-
-export interface SchoolResource {
-    name: string;
-    link: string;
-}
+import { Resource } from "../types/Resource";
 
 export interface SchoolData {
     name: string;
@@ -15,7 +11,7 @@ export interface SchoolData {
     location: string;
     phoneNumber: string;
     email: string;
-    resources: SchoolResource[];
+    resources: Resource[];
 }
 
 interface Props {

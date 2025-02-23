@@ -12,7 +12,7 @@ type TransformActions<Actions> = {
 
 type ActionsObject<Action> = Record<
     string,
-    (dispatch: React.Dispatch<Action>) => (...payload: unknown[]) => void
+    (dispatch: React.Dispatch<Action>) => (...payload: never[]) => unknown
 >;
 
 type ContextType<

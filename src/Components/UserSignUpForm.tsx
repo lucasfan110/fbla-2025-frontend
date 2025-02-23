@@ -5,7 +5,7 @@ import Dropdown from "./Dropdown";
 import FormInput from "./FormInput";
 import "./UserSignUpForm.scss";
 
-export interface SignUpFormData extends User {
+export interface SignUpFormData extends Omit<User, "_id"> {
     password: string;
 }
 

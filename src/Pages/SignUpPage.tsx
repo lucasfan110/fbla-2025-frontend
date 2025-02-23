@@ -4,10 +4,12 @@ import Button from "../components/Button";
 import ErrorText from "../components/ErrorText";
 import "./SignUpPage.scss";
 import { UserAuthFormContext } from "../context/UserAuthFormContext";
+import useAuth from "../hooks/useAuth";
 
 export default function SignUpPage() {
-    const { openLogInModal } = useContext(UserAuthFormContext);
+    const { openLogInModal, closeModal } = useContext(UserAuthFormContext);
     const [errorElement, setErrorElement] = useState<React.ReactNode>(null);
+    const { logIn } = useAuth();
 
     const signup = useGoogleLogin({
         onSuccess: onGoogleSignUp,
@@ -71,7 +73,8 @@ export default function SignUpPage() {
     }
 
     function onSignUpSuccess() {
-        location.reload();
+        logIn();
+        closeModal();
     }
 
     return (

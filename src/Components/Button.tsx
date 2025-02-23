@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import "./Button.scss";
 
-type ButtonType = "primary" | "link" | "secondary";
+type ButtonType = "primary" | "link" | "secondary" | "danger";
 
 interface Props extends React.ComponentPropsWithoutRef<"button"> {
     variation?: ButtonType;

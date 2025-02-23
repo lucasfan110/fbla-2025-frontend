@@ -1,4 +1,5 @@
 @use "../sass/abstracts/variables";
+@use "sass:color";
 
 .button {
     background: none;
@@ -52,6 +53,19 @@
 
         &:hover {
             background-color: initial;
+        }
+    }
+
+    &--danger {
+        background-color: variables.$color-invalid;
+        color: variables.$color-white;
+        box-shadow: 0 1rem 4rem variables.$color-box-shadow;
+
+        &:hover {
+            background-color: color.adjust(
+                variables.$color-invalid,
+                $lightness: 15%
+            );
         }
     }
 }

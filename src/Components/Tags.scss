@@ -1,0 +1,35 @@
+@use "../sass/abstracts/variables";
+@use "../sass/base/animations";
+
+.tags {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    font-size: variables.$font-size-small;
+
+    &--compacted {
+        max-height: 2.6rem;
+        overflow-y: hidden;
+        gap: 4px;
+        font-size: variables.$font-size-extra-small;
+    }
+
+    &__tag {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: variables.$color-primary-light;
+        color: variables.$color-white;
+        padding: 4px 1rem;
+        border-radius: 2rem;
+
+        animation: enlargeAnimation 0.3s ease-in-out;
+    }
+}
+
+@media screen and (max-width: variables.$shrink-size) {
+    .tags {
+        font-size: variables.$font-size-extra-small;
+    }
+}

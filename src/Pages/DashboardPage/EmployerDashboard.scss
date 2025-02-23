@@ -1,0 +1,16 @@
+.employer-dashboard {
+    &__title {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__add-posting-btn {
+        position: fixed;
+        bottom: 5rem;
+        right: 20rem;
+        font-size: 4rem;
+        width: 8rem;
+        height: 8rem;
+        border-radius: 50%;
+    }
+}

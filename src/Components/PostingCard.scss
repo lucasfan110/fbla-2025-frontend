@@ -1,0 +1,111 @@
+@use "../sass/abstracts/variables";
+
+.posting-card {
+    transition: 0.2s all ease-in-out;
+    display: flex;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 0.4rem 1.2rem variables.$color-box-shadow;
+    box-sizing: border-box;
+    cursor: pointer;
+    width: min(90vw, 100rem);
+    margin: 2rem 0;
+    height: 22rem;
+
+    &:hover {
+        transform: scale(1.01);
+    }
+
+    &__thumbnail-container {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+        width: 20rem;
+        background-color: variables.$color-gray-light;
+    }
+
+    &__thumbnail {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 1rem 4rem variables.$color-box-shadow;
+        width: auto;
+        height: auto;
+        max-height: 100%;
+    }
+
+    &__content {
+        box-sizing: border-box;
+        padding: 2rem 2rem;
+        width: 80rem;
+    }
+
+    &__name {
+        font-weight: normal;
+    }
+
+    &__location {
+        color: variables.$color-gray-3;
+        font-size: variables.$font-size-small;
+    }
+
+    &__contact-info {
+        display: flex;
+        margin-top: 1rem;
+        gap: 5rem;
+        color: variables.$color-gray-2;
+        font-size: variables.$font-size-small;
+    }
+
+    &__email {
+        i::before {
+            transform: translateY(2px);
+        }
+    }
+
+    // &__phone-number {
+    //     &--grid {
+    //         font-size: variables.$font-size-extra-small;
+    //     }
+    // }
+
+    &__summary {
+        font-size: variables.$font-size-small;
+        margin-top: 1rem;
+        overflow: hidden;
+        display: -webkit-box;
+        line-clamp: 3;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        min-height: 7rem;
+    }
+
+    &__space-between {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__tags {
+        margin-top: 1rem;
+        font-size: variables.$font-size-small;
+    }
+
+    &__icon-buttons {
+        display: flex;
+        gap: 1rem;
+    }
+
+    &__icon-button {
+        font-size: variables.$font-size-small;
+        padding: 8px;
+    }
+}
+
+// @media screen and (max-width: $shrink-size) {
+//     .company-card {
+//         &--grid {
+//             width: 85vw;
+//         }
+//     }
+// }

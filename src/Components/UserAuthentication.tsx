@@ -1,35 +1,13 @@
-import { useContext, useEffect, useState } from "react";
-import backend from "../api/backend";
-import User from "../types/User";
+import { useContext } from "react";
+import { UserAuthFormContext } from "../context/UserAuthFormContext";
+import useAuth from "../hooks/useAuth";
 import Button from "./Button";
 import "./UserAuthentication.scss";
 import UserProfile from "./UserProfile";
-import { UserAuthFormContext } from "../context/UserAuthFormContext";
 
 export default function UserAuthentication() {
-    const [user, setUser] = useState<User | null>(null);
-
     const { openLogInModal, openSignUpModal } = useContext(UserAuthFormContext);
-
-    useEffect(() => {
-        (async () => {
-            const jwt = localStorage.getItem("jwt");
-
-            if (!jwt) {
-                return;
-            }
-
-            const res = await backend.get("/users/get-user-from-token", {
-                headers: { Authorization: `Bearer ${jwt}` },
-            });
-
-            if (res.data.status === "success") {
-                setUser(res.data.user);
-            } else {
-                localStorage.removeItem("jwt");
-            }
-        })();
-    }, []);
+    const { user } = useAuth();
 
     if (!user) {
         return (

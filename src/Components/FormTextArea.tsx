@@ -1,28 +1,30 @@
 import classNames from "classnames";
 import { ChangeEventHandler, useState } from "react";
 import "./FormInput.scss";
-import Input from "./Input";
+import TextArea from "./TextArea";
 
 interface Validate {
     validator: (value: string) => boolean;
     invalidMessage: string;
 }
 
-export interface FormInputProps extends React.ComponentProps<"input"> {
+export interface FormTextAreaProps extends React.ComponentProps<"textarea"> {
     label: string;
     validate?: Validate | Validate[];
 }
 
-export default function FormInput({
+export default function FormTextArea({
     label,
     className,
     onChange,
     validate,
     ...props
-}: FormInputProps) {
+}: FormTextAreaProps) {
     const [changed, setChanged] = useState(false);
 
-    const handleInputChange: ChangeEventHandler<HTMLInputElement> = event => {
+    const handleInputChange: ChangeEventHandler<
+        HTMLTextAreaElement
+    > = event => {
         setChanged(true);
         onChange?.(event);
     };
@@ -64,7 +66,7 @@ export default function FormInput({
                     <span className="form-input__required">*</span>
                 )}
             </label>
-            <Input
+            <TextArea
                 className="form-input__input"
                 onChange={handleInputChange}
                 {...props}

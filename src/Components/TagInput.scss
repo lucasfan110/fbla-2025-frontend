@@ -1,0 +1,16 @@
+@use "../sass/abstracts/variables";
+
+.tag-input {
+    &__tag-delete {
+        background: none;
+        border: none;
+        font-size: variables.$font-size-small;
+        cursor: pointer;
+        transition: 0.2s;
+        color: variables.$color-white;
+
+        &:hover {
+            color: variables.$color-gray-2;
+        }
+    }
+}

@@ -68,8 +68,13 @@ export default function FinishSignUpPage() {
     useEffect(() => {
         (async () => {
             const userInfo = await fetchUserInfo();
-            const { email, name } = userInfo;
-            setFormData(formData => ({ ...formData, email, firstName: name }));
+            const { email, given_name, family_name } = userInfo;
+            setFormData(formData => ({
+                ...formData,
+                email,
+                firstName: given_name,
+                lastName: family_name,
+            }));
         })();
     }, []);
 
@@ -115,7 +120,7 @@ export default function FinishSignUpPage() {
                             variation="primary"
                             className="finish-sign-up-page__submit-button"
                         >
-                            Submit
+                            Finish Sign Up
                         </Button>
                     </form>
                 </div>

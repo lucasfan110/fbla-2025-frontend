@@ -7,6 +7,7 @@ import ErrorText from "../components/ErrorText";
 import FormInput from "../components/FormInput";
 import SeparatorWithElement from "../components/SeparatorWithElement";
 import { UserAuthFormContext } from "../context/UserAuthFormContext";
+import useAuth from "../hooks/useAuth";
 import "./LogInPage.scss";
 
 interface State {
@@ -39,9 +40,10 @@ function reducer(state: State, action: Action): State {
 }
 
 export default function LogInPage() {
-    const { openSignUpModal } = useContext(UserAuthFormContext);
+    const { openSignUpModal, closeModal } = useContext(UserAuthFormContext);
     const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
     const { email, password, errorElement } = state;
+    const { logIn } = useAuth();
 
     const login = useGoogleLogin({
         onSuccess: onGoogleLogin,
@@ -55,17 +57,21 @@ export default function LogInPage() {
     });
 
     async function onGoogleLogin(response: TokenResponse) {
-        const res = await backend.post(
-            "/users/google-auth/login",
-            JSON.stringify({ token: response.access_token })
-        );
+        try {
+            const res = await backend.post(
+                "/users/google-auth/login",
+                JSON.stringify({ token: response.access_token })
+            );
 
-        const { status, token } = res.data;
+            const { status, token } = res.data;
 
-        if (status === "success") {
-            localStorage.setItem("jwt", token);
-            onLoginSuccess();
-        } else {
+            if (status === "success") {
+                localStorage.setItem("jwt", token);
+                onLoginSuccess();
+            } else {
+                throw new Error();
+            }
+        } catch {
             dispatch({
                 type: "setError",
                 payload: (
@@ -107,7 +113,8 @@ export default function LogInPage() {
     }
 
     function onLoginSuccess() {
-        location.reload();
+        logIn();
+        closeModal();
     }
 
     return (
