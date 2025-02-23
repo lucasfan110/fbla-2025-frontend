@@ -21,6 +21,7 @@ $color-secondary-dark: color.adjust($color-secondary, $blackness: 10%);
 $color-secondary-light: color.adjust($color-secondary, $lightness: 10%);
 
 $color-invalid: red;
+$color-safe: lightgreen;
 
 $color-box-shadow-dark: rgba($color-black, 0.4);
 $color-box-shadow: rgba($color-black, 0.2);

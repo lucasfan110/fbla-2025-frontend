@@ -9,8 +9,8 @@
     box-sizing: border-box;
     cursor: pointer;
     width: min(90vw, 100rem);
-    margin: 2rem 0;
-    height: 22rem;
+    margin: 2rem auto;
+    height: 25rem;
 
     &:hover {
         transform: scale(1.01);
@@ -41,6 +41,12 @@
         width: 80rem;
     }
 
+    &__name-container {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
     &__name {
         font-weight: normal;
     }
@@ -48,6 +54,7 @@
     &__location {
         color: variables.$color-gray-3;
         font-size: variables.$font-size-small;
+        height: 2.3rem;
     }
 
     &__contact-info {
@@ -64,21 +71,15 @@
         }
     }
 
-    // &__phone-number {
-    //     &--grid {
-    //         font-size: variables.$font-size-extra-small;
-    //     }
-    // }
-
     &__summary {
         font-size: variables.$font-size-small;
         margin-top: 1rem;
         overflow: hidden;
         display: -webkit-box;
-        line-clamp: 3;
-        -webkit-line-clamp: 3;
+        line-clamp: 4;
+        -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
-        min-height: 7rem;
+        height: 10rem;
     }
 
     &__space-between {

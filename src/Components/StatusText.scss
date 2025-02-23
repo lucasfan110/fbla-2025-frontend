@@ -1,0 +1,19 @@
+@use "../sass/abstracts/variables";
+
+.status-text {
+    padding: 5px 2rem;
+    border-radius: 5rem;
+    color: variables.$color-white;
+
+    &--pending {
+        background-color: variables.$color-primary;
+    }
+
+    &--approved {
+        background-color: variables.$color-safe;
+    }
+
+    &--rejected {
+        background-color: variables.$color-invalid;
+    }
+}

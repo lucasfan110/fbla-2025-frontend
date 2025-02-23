@@ -1,5 +1,7 @@
 import { Resource } from "./Resource";
 
+export type Status = "pending" | "approved" | "rejected";
+
 export interface Posting {
     _id: string;
     name: string;
@@ -11,4 +13,5 @@ export interface Posting {
     resources?: Resource[];
     tags?: string[];
     applications: string[];
+    status: Status;
 }

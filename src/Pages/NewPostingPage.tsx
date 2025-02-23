@@ -7,11 +7,20 @@ import FormInput from "../components/FormInput";
 import ResourceEditor from "../components/ResourceEditor";
 import TagInput from "../components/TagInput";
 import { useAuthVerified } from "../hooks/useAuth";
-import { Posting } from "../types/Posting";
 import "./NewPostingPage.scss";
 import FormTextArea from "../components/FormTextArea";
+import getAuthToken from "../util/getAuthToken";
+import { Resource } from "../types/Resource";
 
-type FormData = Omit<Posting, "employer" | "applications" | "_id">;
+type FormData = {
+    name: string;
+    image?: string | undefined;
+    description?: string | undefined;
+    location?: string | undefined;
+    schools: string[];
+    resources?: Resource[] | undefined;
+    tags?: string[] | undefined;
+};
 
 export default function NewPostingPage() {
     const [formData, setFormData] = useState<FormData>({
@@ -42,7 +51,7 @@ export default function NewPostingPage() {
             formData,
             {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+                    Authorization: getAuthToken(),
                 },
             }
         );

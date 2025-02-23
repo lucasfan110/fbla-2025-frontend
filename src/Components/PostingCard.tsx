@@ -4,6 +4,7 @@ import Tags from "./Tags";
 import "./PostingCard.scss";
 import { Posting } from "../types/Posting";
 import Button from "./Button";
+import StatusText from "./StatusText";
 
 export default function PostingCard({
     _id,
@@ -12,6 +13,7 @@ export default function PostingCard({
     location,
     image,
     description,
+    status,
 }: Posting) {
     const navigate = useNavigate();
 
@@ -35,26 +37,34 @@ export default function PostingCard({
             </div>
             <div className="posting-card__content">
                 <div className="posting-card__space-between">
-                    <h3
-                        className="posting-card__name"
-                        dangerouslySetInnerHTML={{ __html: sanitizeHTML(name) }}
-                    ></h3>
+                    <div className="posting-card__name-container">
+                        <h3
+                            className="posting-card__name"
+                            dangerouslySetInnerHTML={{
+                                __html: sanitizeHTML(name),
+                            }}
+                        ></h3>
+
+                        <StatusText status={status} />
+                    </div>
 
                     <div className="posting-card__icon-buttons">
                         <Button
                             className="posting-card__icon-button"
-                            onClick={() =>
-                                navigate(`/employer/edit-posting/${_id}`)
-                            }
+                            onClick={e => {
+                                e.stopPropagation();
+                                navigate(`/employer/edit-posting/${_id}`);
+                            }}
                         >
                             <i className="bi bi-pencil-square"></i>
                         </Button>
                         <Button
                             className="posting-card__icon-button"
                             variation="danger"
-                            onClick={() =>
-                                navigate(`/employer/delete-posting/${_id}`)
-                            }
+                            onClick={e => {
+                                e.stopPropagation();
+                                navigate(`/employer/delete-posting/${_id}`);
+                            }}
                         >
                             <i className="bi bi-trash3"></i>
                         </Button>

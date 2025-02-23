@@ -1,13 +1,16 @@
 .employer-dashboard {
+    margin-bottom: 10rem;
+
     &__title {
         display: flex;
         justify-content: space-between;
+        margin-top: 2rem;
     }
 
     &__add-posting-btn {
         position: fixed;
         bottom: 5rem;
-        right: 20rem;
+        right: 5rem;
         font-size: 4rem;
         width: 8rem;
         height: 8rem;

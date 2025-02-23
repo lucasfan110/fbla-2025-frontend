@@ -1,10 +1,37 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import "./EmployerDashboard.scss";
-import PostingCard from "../../components/PostingCard";
+import { useEffect, useState } from "react";
+import { Posting } from "../../types/Posting";
+import backend from "../../api/backend";
+import { useAuthVerified } from "../../hooks/useAuth";
+import getAuthToken from "../../util/getAuthToken";
+import PostingCardList from "../../components/PostingCardList";
 
 export default function EmployerDashboard() {
     const navigate = useNavigate();
+    const { user } = useAuthVerified();
+
+    const [postings, setPostings] = useState<Posting[]>([]);
+
+    useEffect(() => {
+        (async () => {
+            const res = await backend.get(
+                `/users/employers/${user._id}/postings`,
+                {
+                    headers: {
+                        Authorization: getAuthToken(),
+                    },
+                }
+            );
+
+            if (res.data.status === "success") {
+                setPostings(res.data.data.postings);
+            } else {
+                alert("Failed to get postings");
+            }
+        })();
+    }, [user]);
 
     return (
         <div className="employer-dashboard">
@@ -13,17 +40,7 @@ export default function EmployerDashboard() {
             </div>
             {/* <input placeholder="Search..." /> */}
 
-            <PostingCard
-                _id="blah"
-                name="Test #1"
-                image="https://www.insperity.com/wp-content/uploads/how-to-write-a-job-posting-1200x630-1.png"
-                applications={[]}
-                employer="blah"
-                schools={[]}
-                description="blah"
-                location="blah"
-                tags={["blah#1", "blah #2"]}
-            />
+            <PostingCardList postingsList={postings} />
 
             <Button
                 variation="primary"
