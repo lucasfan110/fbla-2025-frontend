@@ -10,6 +10,7 @@ interface Props {
     options?: Option[];
     value?: string;
     onChange?: (value: string) => void;
+    required?: boolean;
 }
 
 export default function Dropdown({
@@ -17,6 +18,7 @@ export default function Dropdown({
     options = [],
     value,
     onChange,
+    required,
 }: Props) {
     function handleSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
         onChange?.(event.target.value);
@@ -26,12 +28,14 @@ export default function Dropdown({
         <div className="dropdown">
             <label htmlFor="dropdown" className="dropdown__label">
                 {label}
+                {required && <span className="form-input__required">*</span>}
             </label>
             <select
                 id="dropdown"
                 value={value}
                 onChange={handleSelectChange}
                 className="dropdown__select"
+                required={required}
             >
                 <option value="" disabled>
                     Select an option

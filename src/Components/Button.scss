@@ -68,4 +68,17 @@
             );
         }
     }
+
+    &--safe {
+        background-color: variables.$color-safe;
+        color: variables.$color-white;
+        box-shadow: 0 1rem 4rem variables.$color-box-shadow;
+
+        &:hover {
+            background-color: color.adjust(
+                variables.$color-safe,
+                $lightness: 5%
+            );
+        }
+    }
 }

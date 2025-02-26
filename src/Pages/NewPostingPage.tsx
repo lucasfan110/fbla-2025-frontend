@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import backend from "../api/backend";
@@ -11,6 +11,7 @@ import "./NewPostingPage.scss";
 import FormTextArea from "../components/FormTextArea";
 import getAuthToken from "../util/getAuthToken";
 import { Resource } from "../types/Resource";
+import useSchools, { schoolsToOptions } from "../hooks/useSchools";
 
 type FormData = {
     name: string;
@@ -27,27 +28,15 @@ export default function NewPostingPage() {
         name: "",
         schools: [],
     });
-    const [allSchools, setAllSchools] = useState<
-        { _id: string; name: string }[]
-    >([]);
     const { user } = useAuthVerified();
     const navigate = useNavigate();
-
-    useEffect(() => {
-        (async () => {
-            const schools = await backend.get("/schools", {
-                params: { fields: "name" },
-            });
-
-            setAllSchools(schools.data.data.schools);
-        })();
-    }, []);
+    const schools = useSchools();
 
     async function onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
         const res = await backend.post(
-            `/users/employers/${user._id}/postings`,
+            `/users/${user._id}/postings`,
             formData,
             {
                 headers: {
@@ -98,10 +87,7 @@ export default function NewPostingPage() {
                 </label>
                 <Select
                     className="new-posting-page__select new-posting-page__form-input"
-                    options={allSchools.map(school => ({
-                        label: school.name,
-                        value: school._id,
-                    }))}
+                    options={schoolsToOptions(schools)}
                     isMulti
                     onChange={schools =>
                         setFormData({

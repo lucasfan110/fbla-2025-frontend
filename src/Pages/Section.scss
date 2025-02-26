@@ -1,0 +1,8 @@
+@use "../sass/abstracts/variables";
+
+.section {
+    width: 100%;
+    background-color: variables.$color-gray-lighter;
+    padding: 3rem;
+    border-radius: 1rem;
+}

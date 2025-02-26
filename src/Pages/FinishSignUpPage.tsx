@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import backend from "../api/backend";
 import googleOauth, { GoogleAccountInfo } from "../api/google-oauth";
 import Button from "../components/Button";
-import SchoolForm, { SchoolData } from "../components/SchoolForm";
+import SchoolForm, { SchoolFormData } from "../components/SchoolForm";
 import UserSignUpForm, { SignUpFormData } from "../components/UserSignUpForm";
 import "./FinishSignUpPage.scss";
 
@@ -14,9 +14,10 @@ const DEFAULT_FORM_DATA: SignUpFormData = {
     lastName: "",
     phoneNumber: "",
     grade: 9,
+    school: "",
 };
 
-const DEFAULT_SCHOOL_DATA: SchoolData = {
+const DEFAULT_SCHOOL_DATA: SchoolFormData = {
     description: "",
     email: "",
     image: "",

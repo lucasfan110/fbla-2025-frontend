@@ -6,6 +6,10 @@ import { Posting } from "../types/Posting";
 import Button from "./Button";
 import StatusText from "./StatusText";
 
+interface Props extends Posting {
+    showStatus?: boolean;
+}
+
 export default function PostingCard({
     _id,
     name,
@@ -14,15 +18,15 @@ export default function PostingCard({
     image,
     description,
     status,
-}: Posting) {
+    showStatus = true,
+}: Props) {
     const navigate = useNavigate();
 
-    function handleCompanyCardClick() {
-        navigate(`/dashboard/company/${_id}`);
-    }
-
     return (
-        <div className="posting-card" onClick={handleCompanyCardClick}>
+        <div
+            className="posting-card"
+            onClick={() => navigate(`/dashboard/postings/${_id}`)}
+        >
             <div className="posting-card__thumbnail-container">
                 {/* <ImageOrDefault
                     src={image}
@@ -45,7 +49,7 @@ export default function PostingCard({
                             }}
                         ></h3>
 
-                        <StatusText status={status} />
+                        {showStatus && <StatusText status={status} />}
                     </div>
 
                     <div className="posting-card__icon-buttons">
@@ -53,7 +57,7 @@ export default function PostingCard({
                             className="posting-card__icon-button"
                             onClick={e => {
                                 e.stopPropagation();
-                                navigate(`/employer/edit-posting/${_id}`);
+                                navigate(`/dashboard/postings/${_id}/edit`);
                             }}
                         >
                             <i className="bi bi-pencil-square"></i>
@@ -63,7 +67,7 @@ export default function PostingCard({
                             variation="danger"
                             onClick={e => {
                                 e.stopPropagation();
-                                navigate(`/employer/delete-posting/${_id}`);
+                                navigate(`/employer/postings/${_id}/delete`);
                             }}
                         >
                             <i className="bi bi-trash3"></i>

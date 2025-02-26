@@ -11,4 +11,8 @@ export default interface User {
      * Only used when role === "student"
      */
     grade?: number;
+    /**
+     * Only used when role === "admin" | "student"
+     */
+    school?: string;
 }

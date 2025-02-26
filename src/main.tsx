@@ -1,3 +1,5 @@
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import mapboxgl from "mapbox-gl";
 import { createRoot } from "react-dom/client";
 import {
     createHashRouter,
@@ -5,17 +7,20 @@ import {
     Route,
     RouterProvider,
 } from "react-router-dom";
+import { UserAuthProvider } from "./context/UserAuthContext.ts";
+import { UserAuthFormProvider } from "./context/UserAuthFormContext.ts";
 import "./index.scss";
 import AppLayout from "./layouts/AppLayout.tsx";
-import IndexPage from "./pages/IndexPage.tsx";
 import ContainerLayout from "./layouts/ContainerLayout.tsx";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import FinishSignUpPage from "./pages/FinishSignUpPage.tsx";
-import { UserAuthFormProvider } from "./context/UserAuthFormContext.ts";
 import DashboardPage from "./pages/DashboardPage/index.tsx";
-import { UserAuthProvider } from "./context/UserAuthContext.ts";
+import FinishSignUpPage from "./pages/FinishSignUpPage.tsx";
+import IndexPage from "./pages/IndexPage.tsx";
 import NewPostingPage from "./pages/NewPostingPage.tsx";
-import ValidateUserRole from "./pages/ValidateUserRole.tsx";
+import PostingDetailsPage from "./pages/PostingDetailsPage.tsx";
+import ValidateUser from "./pages/ValidateUser.tsx";
+
+mapboxgl.accessToken =
+    "pk.eyJ1IjoibHVjYXNmYW4iLCJhIjoiY203bGlzeDBjMGJyeDJrcHRzOWFtMmVrciJ9.ispn4TNP3afN0jFC4npUEg";
 
 const router = createHashRouter(
     createRoutesFromElements(
@@ -23,12 +28,17 @@ const router = createHashRouter(
             <Route path="/" element={<AppLayout />}>
                 <Route index element={<IndexPage />} />
                 <Route element={<ContainerLayout />}>
-                    <Route path="/dashboard" element={<DashboardPage />} />
+                    <Route path="/dashboard">
+                        <Route index element={<DashboardPage />} />
+                        <Route path="postings/:postingId">
+                            <Route index element={<PostingDetailsPage />} />
+                        </Route>
+                    </Route>
                 </Route>
 
                 <Route
                     path="/employer"
-                    element={<ValidateUserRole userRole="employer" />}
+                    element={<ValidateUser userRole="employer" />}
                 >
                     <Route element={<ContainerLayout />}>
                         <Route

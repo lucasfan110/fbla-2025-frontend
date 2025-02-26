@@ -1,22 +1,14 @@
 import validator from "validator";
+import { School } from "../hooks/useSchools";
 import FormInput from "./FormInput";
-import "./SchoolForm.scss";
 import ResourceEditor from "./ResourceEditor";
-import { Resource } from "../types/Resource";
+import "./SchoolForm.scss";
 
-export interface SchoolData {
-    name: string;
-    image: string;
-    description: string;
-    location: string;
-    phoneNumber: string;
-    email: string;
-    resources: Resource[];
-}
+export type SchoolFormData = Omit<School, "_id">;
 
 interface Props {
-    schoolData: SchoolData;
-    setSchoolData: (schoolData: SchoolData) => void;
+    schoolData: SchoolFormData;
+    setSchoolData: (schoolData: SchoolFormData) => void;
 }
 
 export default function SchoolForm({ schoolData, setSchoolData }: Props) {

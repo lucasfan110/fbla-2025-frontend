@@ -3,11 +3,11 @@ import { UserRole } from "../types/User";
 import useAuth from "../hooks/useAuth";
 
 interface Props {
-    userRole: UserRole;
+    userRole?: UserRole;
     children?: React.ReactNode;
 }
 
-export default function ValidateUserRole({ children, userRole }: Props) {
+export default function ValidateUser({ children, userRole }: Props) {
     const { user } = useAuth();
 
     if (!user || user.role !== userRole) {

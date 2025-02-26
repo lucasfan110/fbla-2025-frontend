@@ -4,6 +4,7 @@ import User, { UserRole } from "../types/User";
 import Dropdown from "./Dropdown";
 import FormInput from "./FormInput";
 import "./UserSignUpForm.scss";
+import useSchools, { schoolsToOptions } from "../hooks/useSchools";
 
 export interface SignUpFormData extends Omit<User, "_id"> {
     password: string;
@@ -16,6 +17,7 @@ interface Props {
 
 export default function UserSignUpForm({ formData, setFormData }: Props) {
     const [confirmPassword, setConfirmPassword] = useState("");
+    const schools = useSchools();
 
     return (
         <>
@@ -164,34 +166,50 @@ export default function UserSignUpForm({ formData, setFormData }: Props) {
             />
 
             {formData.role === "student" && (
-                <FormInput
-                    label="Grade"
-                    placeholder="Grade"
-                    id="grade"
-                    type="number"
-                    className="user-sign-up-form__form-input"
-                    required
-                    min={9}
-                    max={12}
-                    validate={[
-                        {
-                            validator: value => {
-                                const valueAsNumber = Number(value);
-                                return (
-                                    valueAsNumber >= 9 && valueAsNumber <= 12
-                                );
+                <>
+                    <FormInput
+                        label="Grade"
+                        placeholder="Grade"
+                        id="grade"
+                        type="number"
+                        className="user-sign-up-form__form-input"
+                        required
+                        min={9}
+                        max={12}
+                        validate={[
+                            {
+                                validator: value => {
+                                    const valueAsNumber = Number(value);
+                                    return (
+                                        valueAsNumber >= 9 &&
+                                        valueAsNumber <= 12
+                                    );
+                                },
+                                invalidMessage: "Grade must be between 9-12!",
                             },
-                            invalidMessage: "Grade must be between 9-12!",
-                        },
-                    ]}
-                    value={formData.grade}
-                    onChange={e => {
-                        setFormData({
-                            ...formData,
-                            grade: e.target.valueAsNumber,
-                        });
-                    }}
-                />
+                        ]}
+                        value={formData.grade}
+                        onChange={e => {
+                            setFormData({
+                                ...formData,
+                                grade: e.target.valueAsNumber,
+                            });
+                        }}
+                    />
+
+                    <Dropdown
+                        label="Your School"
+                        required
+                        options={schoolsToOptions(schools)}
+                        value={formData.school}
+                        onChange={value =>
+                            setFormData({
+                                ...formData,
+                                school: value,
+                            })
+                        }
+                    />
+                </>
             )}
         </>
     );

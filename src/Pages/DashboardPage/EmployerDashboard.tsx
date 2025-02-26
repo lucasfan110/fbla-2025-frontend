@@ -16,14 +16,14 @@ export default function EmployerDashboard() {
 
     useEffect(() => {
         (async () => {
-            const res = await backend.get(
-                `/users/employers/${user._id}/postings`,
-                {
-                    headers: {
-                        Authorization: getAuthToken(),
-                    },
-                }
-            );
+            const res = await backend.get(`/users/${user._id}/postings`, {
+                params: {
+                    owner: user._id,
+                },
+                headers: {
+                    Authorization: getAuthToken(),
+                },
+            });
 
             if (res.data.status === "success") {
                 setPostings(res.data.data.postings);
