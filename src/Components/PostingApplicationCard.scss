@@ -1,0 +1,10 @@
+@use "../sass/abstracts/mixins";
+
+.posting-application-card {
+    @include mixins.card;
+
+    &__contact-info {
+        display: flex;
+        gap: 2rem;
+    }
+}

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import backend from "../api/backend";
-import { Posting } from "../types/Posting";
+import Posting from "../types/Posting";
 import getAuthToken from "../util/getAuthToken";
 import { useAuthVerified } from "./useAuth";
 

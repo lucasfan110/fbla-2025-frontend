@@ -3,11 +3,15 @@ import "./Button.scss";
 
 type ButtonType = "primary" | "link" | "secondary" | "danger" | "safe";
 
-interface Props extends React.ComponentPropsWithoutRef<"button"> {
+export interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
     variation?: ButtonType;
 }
 
-export default function Button({ className, variation, ...props }: Props) {
+export default function Button({
+    className,
+    variation,
+    ...props
+}: ButtonProps) {
     return (
         <button
             className={classNames(

@@ -1,8 +1,7 @@
-import { Resource } from "./Resource";
+import Resource from "./Resource";
+import Status from "./Status";
 
-export type Status = "pending" | "approved" | "rejected";
-
-export interface Posting {
+interface Posting {
     _id: string;
     name: string;
     image?: string;
@@ -15,3 +14,5 @@ export interface Posting {
     applications: string[];
     status: Status;
 }
+
+export default Posting;

@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { Status } from "../types/Posting";
+import Status from "../types/Status";
 import "./StatusText.scss";
 
 interface Props {

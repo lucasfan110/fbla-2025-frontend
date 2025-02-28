@@ -4,3 +4,12 @@
     max-width: variables.$container-width;
     margin: 0 auto;
 }
+
+@mixin card {
+    border: 2px solid variables.$color-black;
+    background-color: variables.$color-gray-light;
+    margin: 2rem 0;
+    padding: 2rem;
+    border-radius: 2rem;
+    cursor: pointer;
+}

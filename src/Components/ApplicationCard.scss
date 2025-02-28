@@ -1,0 +1,9 @@
+@use "../sass/abstracts/mixins";
+
+.application-card {
+    @include mixins.card;
+
+    &__response-container {
+        margin: 2rem 0;
+    }
+}

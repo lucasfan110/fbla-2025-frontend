@@ -45,20 +45,24 @@ export default function IndexPage() {
                     <h2>Here Is Why Our Website Is the Best</h2>
                     <div className="index-page__details-row-1 index-page__split">
                         <div className="index-page__split-container">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Beatae dicta neque asperiores iste nisi
-                            debitis rerum, tempora, fugit consectetur quam et,
-                            accusamus doloremque quo. Illo non est et nam
-                            consequatur. Illo, qui ad? Blanditiis sapiente
-                            ducimus quam consectetur aliquam eum, reprehenderit,
-                            sit error ipsum sed consequuntur cum numquam
-                            necessitatibus. Saepe libero ipsa voluptatum magni
-                            eligendi aperiam fugiat impedit optio et. Excepturi
-                            itaque modi debitis doloribus recusandae maxime
-                            labore sed autem voluptatem, eveniet id illo iusto
-                            vero? Amet iure nam quia consequatur doloremque
-                            dolor minus impedit aperiam itaque est, soluta
-                            veritatis.
+                            Our job posting website stands out as the best
+                            choice for both employers and job seekers, offering
+                            an innovative and seamless experience with
+                            cutting-edge features. With 3D Mapbox integration,
+                            users can visually explore job opportunities in an
+                            interactive, geographic format, making
+                            location-based job searches more intuitive than
+                            ever. Our AI-powered chatbot provides instant
+                            assistance, guiding users through job searches,
+                            applications, and employer interactions, ensuring a
+                            smooth and efficient hiring process. Additionally,
+                            Google OAuth integration allows for secure,
+                            one-click sign-ins, eliminating the hassle of
+                            lengthy registrations and making the platform more
+                            accessible. By combining advanced technology with
+                            user-friendly functionality, our platform
+                            revolutionizes job searching, providing an engaging
+                            and efficient experience like no other.
                         </div>
                         <div className="index-page__split-container">
                             <img

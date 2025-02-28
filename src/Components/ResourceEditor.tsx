@@ -1,10 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import Resource from "../types/Resource";
 import Button from "./Button";
+import ErrorText from "./ErrorText";
 import Input from "./Input";
 import "./ResourceEditor.scss";
-import { Link } from "react-router-dom";
-import ErrorText from "./ErrorText";
-import { Resource } from "../types/Resource";
 
 interface ResourceCardProps extends Resource {
     onDelete: (resource: Resource) => void;

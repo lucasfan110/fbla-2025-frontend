@@ -1,12 +1,12 @@
-import { useNavigate } from "react-router-dom";
-import Button from "../../components/Button";
-import "./EmployerDashboard.scss";
 import { useEffect, useState } from "react";
-import { Posting } from "../../types/Posting";
+import { useNavigate } from "react-router-dom";
 import backend from "../../api/backend";
-import { useAuthVerified } from "../../hooks/useAuth";
-import getAuthToken from "../../util/getAuthToken";
+import Button from "../../components/Button";
 import PostingCardList from "../../components/PostingCardList";
+import { useAuthVerified } from "../../hooks/useAuth";
+import Posting from "../../types/Posting";
+import getAuthToken from "../../util/getAuthToken";
+import "./EmployerDashboard.scss";
 
 export default function EmployerDashboard() {
     const navigate = useNavigate();
@@ -35,6 +35,8 @@ export default function EmployerDashboard() {
 
     return (
         <div className="employer-dashboard">
+            <h2 style={{ textAlign: "center" }}>Employer Dashboard</h2>
+
             <div className="employer-dashboard__title">
                 <h2>My Postings</h2>
             </div>

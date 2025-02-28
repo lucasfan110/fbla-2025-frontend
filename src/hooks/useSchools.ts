@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import backend from "../api/backend";
-import { Resource } from "../types/Resource";
+import Resource from "../types/Resource";
 
 export interface School {
     _id: string;
@@ -25,9 +25,7 @@ export default function useSchools() {
 
     useEffect(() => {
         (async () => {
-            const schools = await backend.get("/schools", {
-                params: { fields: "name" },
-            });
+            const schools = await backend.get("/schools");
 
             setAllSchools(schools.data.data.schools);
         })();

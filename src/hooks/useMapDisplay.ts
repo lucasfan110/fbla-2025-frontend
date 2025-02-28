@@ -85,7 +85,6 @@ export default function useMapDisplay(
 ) {
     const map = useRef<mapboxgl.Map | null>(null);
     const [coord, setCoord] = useState<[number, number] | null>(null);
-    console.log(coord);
 
     useEffect(() => {
         (async () => {

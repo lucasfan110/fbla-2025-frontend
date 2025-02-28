@@ -31,7 +31,7 @@ export default function SignUpPage() {
         }).toString();
 
         const popup = window.open(
-            `/#/finish-sign-up?${queryString}`,
+            `/fbla-2025-frontend/#/finish-sign-up?${queryString}`,
             "SignUpPopup",
             `width=${popupWidth},height=${popupHeight},top=${top},left=${left}`
         );

@@ -88,9 +88,18 @@
         flex-direction: column;
     }
 
-    &__admin-section {
-        margin-top: 2rem;
+    &__apply-btn {
+        margin: 2rem 0;
+        align-self: flex-start;
+    }
+
+    &__application-container {
+        width: 100%;
         display: flex;
-        gap: 2rem;
+        // justify-content: center;
+    }
+
+    &__view-applications-btn {
+        margin-top: 2rem;
     }
 }

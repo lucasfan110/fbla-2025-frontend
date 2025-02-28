@@ -15,9 +15,11 @@ import ContainerLayout from "./layouts/ContainerLayout.tsx";
 import DashboardPage from "./pages/DashboardPage/index.tsx";
 import FinishSignUpPage from "./pages/FinishSignUpPage.tsx";
 import IndexPage from "./pages/IndexPage.tsx";
+import MyApplicationsPage from "./pages/MyApplicationsPage.tsx";
 import NewPostingPage from "./pages/NewPostingPage.tsx";
 import PostingDetailsPage from "./pages/PostingDetailsPage.tsx";
 import ValidateUser from "./pages/ValidateUser.tsx";
+import PostingApplicationsPage from "./pages/PostingApplicationsPage.tsx";
 
 mapboxgl.accessToken =
     "pk.eyJ1IjoibHVjYXNmYW4iLCJhIjoiY203bGlzeDBjMGJyeDJrcHRzOWFtMmVrciJ9.ispn4TNP3afN0jFC4npUEg";
@@ -32,7 +34,17 @@ const router = createHashRouter(
                         <Route index element={<DashboardPage />} />
                         <Route path="postings/:postingId">
                             <Route index element={<PostingDetailsPage />} />
+                            <Route
+                                path="applications"
+                                element={<PostingApplicationsPage />}
+                            />
                         </Route>
+                    </Route>
+                    <Route
+                        path="/my-applications"
+                        element={<ValidateUser userRole="student" />}
+                    >
+                        <Route index element={<MyApplicationsPage />} />
                     </Route>
                 </Route>
 

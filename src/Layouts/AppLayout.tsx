@@ -1,7 +1,8 @@
+import { useEffect, useState } from "react";
 import { Outlet, ScrollRestoration } from "react-router-dom";
+import ChatbotWindow from "../components/ChatbotWindow";
 import Navbar from "../components/Navbar";
 import useAuth from "../hooks/useAuth";
-import { useEffect, useState } from "react";
 
 interface Props {
     children?: React.ReactNode;
@@ -29,6 +30,7 @@ export default function AppLayout({ children }: Props) {
         <>
             <Navbar />
             {children ?? <Outlet />}
+            <ChatbotWindow />
             <ScrollRestoration />
         </>
     );

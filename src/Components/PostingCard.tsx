@@ -1,13 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import sanitizeHTML from "sanitize-html";
-import Tags from "./Tags";
-import "./PostingCard.scss";
-import { Posting } from "../types/Posting";
+import Posting from "../types/Posting";
 import Button from "./Button";
+import "./PostingCard.scss";
 import StatusText from "./StatusText";
+import Tags from "./Tags";
 
 interface Props extends Posting {
     showStatus?: boolean;
+    readOnly?: boolean;
 }
 
 export default function PostingCard({
@@ -19,6 +20,7 @@ export default function PostingCard({
     description,
     status,
     showStatus = true,
+    readOnly = false,
 }: Props) {
     const navigate = useNavigate();
 
@@ -52,27 +54,31 @@ export default function PostingCard({
                         {showStatus && <StatusText status={status} />}
                     </div>
 
-                    <div className="posting-card__icon-buttons">
-                        <Button
-                            className="posting-card__icon-button"
-                            onClick={e => {
-                                e.stopPropagation();
-                                navigate(`/dashboard/postings/${_id}/edit`);
-                            }}
-                        >
-                            <i className="bi bi-pencil-square"></i>
-                        </Button>
-                        <Button
-                            className="posting-card__icon-button"
-                            variation="danger"
-                            onClick={e => {
-                                e.stopPropagation();
-                                navigate(`/employer/postings/${_id}/delete`);
-                            }}
-                        >
-                            <i className="bi bi-trash3"></i>
-                        </Button>
-                    </div>
+                    {!readOnly && (
+                        <div className="posting-card__icon-buttons">
+                            <Button
+                                className="posting-card__icon-button"
+                                onClick={e => {
+                                    e.stopPropagation();
+                                    navigate(`/dashboard/postings/${_id}/edit`);
+                                }}
+                            >
+                                <i className="bi bi-pencil-square"></i>
+                            </Button>
+                            <Button
+                                className="posting-card__icon-button"
+                                variation="danger"
+                                onClick={e => {
+                                    e.stopPropagation();
+                                    navigate(
+                                        `/employer/postings/${_id}/delete`
+                                    );
+                                }}
+                            >
+                                <i className="bi bi-trash3"></i>
+                            </Button>
+                        </div>
+                    )}
                 </div>
                 <div className="posting-card__location">{location}</div>
                 {/* <div className="posting-card__contact-info">

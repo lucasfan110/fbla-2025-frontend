@@ -3,19 +3,28 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import backend from "../api/backend";
 import Button from "../components/Button";
+import PostingApplication from "../components/PostingApplication";
 import Tags from "../components/Tags";
 import { useAuthVerified } from "../hooks/useAuth";
 import useMapDisplay from "../hooks/useMapDisplay";
-import { Posting, Status } from "../types/Posting";
+import Posting from "../types/Posting";
+import Status from "../types/Status";
 import getAuthToken from "../util/getAuthToken";
+import NotificationButton from "./NotificationButton";
 import "./PostingDetailsPage.scss";
 import Section from "./Section";
+import usePostingApplications from "../hooks/usePostingApplications";
+import AcceptOrReject from "../components/AcceptOrReject";
 
 export default function PostingDetailsPage() {
-    const { postingId } = useParams();
+    const { postingId = "" } = useParams();
     const { user } = useAuthVerified();
     const [posting, setPosting] = useState<Posting | null>(null);
+    const postingApplicationContainerRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
+    const applications = usePostingApplications(postingId, {
+        status: "pending",
+    });
 
     const mapContainer = useRef<HTMLDivElement>(null);
     useMapDisplay(mapContainer, posting?.location);
@@ -62,8 +71,9 @@ export default function PostingDetailsPage() {
         return null;
     }
 
-    const { image, name, _id, resources, tags, description, location } =
-        posting;
+    console.log(applications);
+
+    const { image, name, resources, tags, description, location } = posting;
 
     function renderResources() {
         return resources?.map((resource, index) => (
@@ -85,30 +95,50 @@ export default function PostingDetailsPage() {
             </div>
             <div className="posting-details-page__name-container">
                 <h2 className="posting-details-page__name">{name}</h2>
-                <Button
-                    className={`posting-details-page__button`}
-                    onClick={e => {
-                        e.stopPropagation();
-                        navigate(`/dashboard/postings/${_id}/edit`);
-                    }}
-                >
-                    <i className="bi bi-pencil-square"></i>
-                </Button>
-                <Button
-                    className={`posting-details-page__button`}
-                    variation="danger"
-                    onClick={e => {
-                        e.stopPropagation();
-                        navigate(`/dashboard/postings/${_id}/delete`);
-                    }}
-                >
-                    <i className="bi bi-trash3"></i>
-                </Button>
+                {user.role !== "student" && (
+                    <>
+                        <Button
+                            className="posting-details-page__button"
+                            onClick={e => {
+                                e.stopPropagation();
+                                navigate(`edit`);
+                            }}
+                        >
+                            <i className="bi bi-pencil-square"></i>
+                        </Button>
+                        <Button
+                            className="posting-details-page__button"
+                            variation="danger"
+                            onClick={e => {
+                                e.stopPropagation();
+                                navigate(`delete`);
+                            }}
+                        >
+                            <i className="bi bi-trash3" />
+                        </Button>
+                    </>
+                )}
             </div>
             <Tags tags={tags} className="posting-details-page__tags" />
+
             <p className="posting-details-page__section posting-details-page__description">
                 {description}
             </p>
+
+            {user.role === "student" && (
+                <Button
+                    variation="primary"
+                    className="posting-details-page__apply-btn"
+                    onClick={() =>
+                        postingApplicationContainerRef.current?.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                        })
+                    }
+                >
+                    Apply Now!
+                </Button>
+            )}
 
             <h3 className="posting-details-page__section-heading">Location</h3>
             <Section>
@@ -131,20 +161,33 @@ export default function PostingDetailsPage() {
             </Section>
 
             {user.role === "admin" && (
-                <div className="posting-details-page__admin-section">
-                    <Button
-                        variation="safe"
-                        onClick={() => handleStatusButtonClick("approved")}
+                <AcceptOrReject onClick={handleStatusButtonClick} />
+            )}
+
+            {user.role === "student" && (
+                <>
+                    <h3 className="posting-details-page__section-heading">
+                        Apply
+                    </h3>
+
+                    <div
+                        ref={postingApplicationContainerRef}
+                        className="posting-details-page__application-container"
                     >
-                        Accept
-                    </Button>
-                    <Button
-                        variation="danger"
-                        onClick={() => handleStatusButtonClick("rejected")}
-                    >
-                        Reject
-                    </Button>
-                </div>
+                        <PostingApplication postingId={postingId} />
+                    </div>
+                </>
+            )}
+
+            {user.role === "employer" && (
+                <NotificationButton
+                    variation="primary"
+                    className="posting-details-page__view-applications-btn"
+                    notificationCount={applications.length}
+                    onClick={() => navigate(`applications`)}
+                >
+                    View Applications
+                </NotificationButton>
             )}
         </div>
     );

@@ -1,42 +1,46 @@
 {
-  "name": "fbla-2025-frontend",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@react-oauth/google": "^0.12.1",
-    "axios": "^1.7.9",
-    "classnames": "^2.5.1",
-    "mapbox-gl": "^3.10.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-modal": "^3.16.1",
-    "react-router-dom": "^6.28.0",
-    "react-select": "^5.10.0",
-    "sanitize-html": "^2.14.0",
-    "validator": "^13.12.0"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.13.0",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "@types/react-modal": "^3.16.3",
-    "@types/sanitize-html": "^2.13.0",
-    "@types/validator": "^13.12.2",
-    "@vitejs/plugin-react-swc": "^3.5.0",
-    "eslint": "^9.13.0",
-    "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-react-refresh": "^0.4.14",
-    "globals": "^15.11.0",
-    "sass": "^1.80.6",
-    "typescript": "~5.6.2",
-    "typescript-eslint": "^8.11.0",
-    "vite": "^5.4.10"
-  }
+	"name": "fbla-2025-frontend",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build && cp dist/index.html dist/404.html",
+		"lint": "eslint .",
+		"preview": "vite preview",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d dist"
+	},
+	"dependencies": {
+		"@react-oauth/google": "^0.12.1",
+		"axios": "^1.7.9",
+		"classnames": "^2.5.1",
+		"mapbox-gl": "^3.10.0",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"react-modal": "^3.16.1",
+		"react-router-dom": "^6.28.0",
+		"react-select": "^5.10.0",
+		"sanitize-html": "^2.14.0",
+		"validator": "^13.12.0"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.13.0",
+		"@types/react": "^18.3.12",
+		"@types/react-dom": "^18.3.1",
+		"@types/react-modal": "^3.16.3",
+		"@types/sanitize-html": "^2.13.0",
+		"@types/validator": "^13.12.2",
+		"@vitejs/plugin-react-swc": "^3.5.0",
+		"eslint": "^9.13.0",
+		"eslint-plugin-react-hooks": "^5.0.0",
+		"eslint-plugin-react-refresh": "^0.4.14",
+		"gh-pages": "^6.3.0",
+		"globals": "^15.11.0",
+		"sass": "^1.80.6",
+		"typescript": "~5.6.2",
+		"typescript-eslint": "^8.11.0",
+		"vite": "^5.4.10"
+	},
+	"homepage": "https://lucasfan110.github.io/fbla-2025-frontend/"
 }

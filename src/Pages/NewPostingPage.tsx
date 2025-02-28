@@ -4,23 +4,23 @@ import Select from "react-select";
 import backend from "../api/backend";
 import Button from "../components/Button";
 import FormInput from "../components/FormInput";
+import FormTextArea from "../components/FormTextArea";
 import ResourceEditor from "../components/ResourceEditor";
 import TagInput from "../components/TagInput";
 import { useAuthVerified } from "../hooks/useAuth";
-import "./NewPostingPage.scss";
-import FormTextArea from "../components/FormTextArea";
-import getAuthToken from "../util/getAuthToken";
-import { Resource } from "../types/Resource";
 import useSchools, { schoolsToOptions } from "../hooks/useSchools";
+import Resource from "../types/Resource";
+import getAuthToken from "../util/getAuthToken";
+import "./NewPostingPage.scss";
 
 type FormData = {
     name: string;
-    image?: string | undefined;
-    description?: string | undefined;
-    location?: string | undefined;
+    image?: string;
+    description?: string;
+    location?: string;
     schools: string[];
-    resources?: Resource[] | undefined;
-    tags?: string[] | undefined;
+    resources?: Resource[];
+    tags?: string[];
 };
 
 export default function NewPostingPage() {
