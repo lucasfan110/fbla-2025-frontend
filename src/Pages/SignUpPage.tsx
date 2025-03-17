@@ -5,6 +5,8 @@ import ErrorText from "../components/ErrorText";
 import "./SignUpPage.scss";
 import { UserAuthFormContext } from "../context/UserAuthFormContext";
 import useAuth from "../hooks/useAuth";
+import getGoogleAccountInfo from "../util/getGoogleAccountInfo";
+import backend from "../api/backend";
 
 export default function SignUpPage() {
     const { openLogInModal, closeModal } = useContext(UserAuthFormContext);
@@ -20,6 +22,26 @@ export default function SignUpPage() {
     });
 
     async function onGoogleSignUp(response: TokenResponse) {
+        const userInfo = await getGoogleAccountInfo(response.access_token);
+
+        const res = await backend.post("/users/check-duplicate-email", {
+            email: userInfo.email,
+        });
+
+        if (res.data.exists) {
+            console.log("exists!");
+            setErrorElement(
+                <>
+                    User with that email already exists!{" "}
+                    <Button variation="link" onClick={openLogInModal}>
+                        Log in
+                    </Button>{" "}
+                    instead!
+                </>
+            );
+            return;
+        }
+
         const popupWidth = 400;
         const popupHeight = 600;
 

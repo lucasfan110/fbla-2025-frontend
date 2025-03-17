@@ -2,6 +2,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import backend from "../api/backend";
+import AcceptOrReject from "../components/AcceptOrReject";
 import Button from "../components/Button";
 import PostingApplication from "../components/PostingApplication";
 import Tags from "../components/Tags";
@@ -13,8 +14,6 @@ import getAuthToken from "../util/getAuthToken";
 import NotificationButton from "./NotificationButton";
 import "./PostingDetailsPage.scss";
 import Section from "./Section";
-import usePostingApplications from "../hooks/usePostingApplications";
-import AcceptOrReject from "../components/AcceptOrReject";
 
 export default function PostingDetailsPage() {
     const { postingId = "" } = useParams();
@@ -22,9 +21,6 @@ export default function PostingDetailsPage() {
     const [posting, setPosting] = useState<Posting | null>(null);
     const postingApplicationContainerRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
-    const applications = usePostingApplications(postingId, {
-        status: "pending",
-    });
 
     const mapContainer = useRef<HTMLDivElement>(null);
     useMapDisplay(mapContainer, posting?.location);
@@ -70,8 +66,6 @@ export default function PostingDetailsPage() {
     if (!posting) {
         return null;
     }
-
-    console.log(applications);
 
     const { image, name, resources, tags, description, location } = posting;
 
@@ -183,7 +177,7 @@ export default function PostingDetailsPage() {
                 <NotificationButton
                     variation="primary"
                     className="posting-details-page__view-applications-btn"
-                    notificationCount={applications.length}
+                    notificationCount={posting.applicationCount}
                     onClick={() => navigate(`applications`)}
                 >
                     View Applications

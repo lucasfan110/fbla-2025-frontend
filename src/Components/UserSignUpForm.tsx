@@ -152,7 +152,7 @@ export default function UserSignUpForm({ formData, setFormData }: Props) {
             <Dropdown
                 label="User Role"
                 options={[
-                    { value: "admin", label: "Admin" },
+                    // { value: "admin", label: "Admin" },
                     { value: "employer", label: "Employer" },
                     { value: "student", label: "Student" },
                 ]}

@@ -2,7 +2,7 @@ import backend from "../api/backend";
 import User from "../types/User";
 import createDataContext from "./createDataContext";
 
-type Action = { type: "set_user"; payload: User };
+type Action = { type: "set_user"; payload: User | null };
 
 type State = {
     user: User | null;
@@ -44,11 +44,19 @@ function logIn(dispatch: React.Dispatch<Action>) {
     };
 }
 
+function logOut(dispatch: React.Dispatch<Action>) {
+    return () => {
+        localStorage.removeItem("jwt");
+        dispatch({ type: "set_user", payload: null });
+    };
+}
+
 export const { Context: UserAuthContext, Provider: UserAuthProvider } =
     createDataContext(
         userAuthReducer,
         {
             logIn,
+            logOut,
         },
         {
             user: null,

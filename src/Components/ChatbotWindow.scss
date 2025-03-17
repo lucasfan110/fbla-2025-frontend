@@ -25,7 +25,7 @@
 
     &__title-bar {
         height: 5rem;
-        background-color: variables.$color-primary;
+        background-color: variables.$color-secondary;
         border-top-left-radius: 1rem;
         border-top-right-radius: 1rem;
         display: flex;
@@ -45,7 +45,7 @@
     }
 
     &__send {
-        color: variables.$color-primary;
+        color: variables.$color-secondary;
     }
 
     &__empty-square,
@@ -128,7 +128,7 @@
 
     .user-message {
         align-self: flex-end;
-        background-color: variables.$color-primary;
+        background-color: variables.$color-secondary;
         color: variables.$color-white;
     }
 }

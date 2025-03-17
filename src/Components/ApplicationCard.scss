@@ -6,4 +6,12 @@
     &__response-container {
         margin: 2rem 0;
     }
+
+    &__response {
+        display: -webkit-box;
+        line-clamp: 2;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+    }
 }

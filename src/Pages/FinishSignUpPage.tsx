@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import backend from "../api/backend";
-import googleOauth, { GoogleAccountInfo } from "../api/google-oauth";
 import Button from "../components/Button";
 import SchoolForm, { SchoolFormData } from "../components/SchoolForm";
 import UserSignUpForm, { SignUpFormData } from "../components/UserSignUpForm";
 import "./FinishSignUpPage.scss";
+import getGoogleAccountInfo from "../util/getGoogleAccountInfo";
 
 const DEFAULT_FORM_DATA: SignUpFormData = {
     role: "student",
@@ -37,18 +37,6 @@ function getAccessToken(): string {
     return accessToken || "";
 }
 
-async function fetchUserInfo(): Promise<GoogleAccountInfo> {
-    const res = await googleOauth.get("/userinfo", {
-        headers: { Authorization: `Bearer ${getAccessToken()}` },
-    });
-
-    if (res.data.error) {
-        throw new Error(res.data.error);
-    }
-
-    return res.data;
-}
-
 function sendMessageAndCloseWindow(type: string, payload: unknown) {
     window.opener.postMessage(
         {
@@ -68,7 +56,7 @@ export default function FinishSignUpPage() {
     // Populate form data
     useEffect(() => {
         (async () => {
-            const userInfo = await fetchUserInfo();
+            const userInfo = await getGoogleAccountInfo(getAccessToken());
             const { email, given_name, family_name } = userInfo;
             setFormData(formData => ({
                 ...formData,

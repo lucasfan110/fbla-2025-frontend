@@ -23,7 +23,9 @@ export default function ApplicationCard({ application }: Props) {
 
             <div className="application-card__response-container">
                 <strong>Your Response:</strong>
-                <p>{application.response}</p>
+                <p className="application-card__response">
+                    {application.response}
+                </p>
             </div>
 
             <div>

@@ -1,0 +1,43 @@
+@use "../sass/abstracts/variables";
+
+.user-profile-dropdown {
+    position: absolute;
+    top: 5rem;
+    right: 0;
+    z-index: 20;
+    background-color: variables.$color-gray-light;
+    width: 20rem;
+    border-radius: 5px;
+    display: none;
+    transition: 0.3s all ease-in-out;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 2rem;
+
+    &__username {
+        text-align: center;
+        font-weight: normal;
+    }
+
+    &__icon-link {
+        display: flex;
+        font-family: variables.$font-size-medium;
+        align-items: center;
+        gap: 6px;
+    }
+
+    &__icon {
+        color: variables.$color-primary;
+    }
+
+    a {
+        color: variables.$color-gray-2;
+        text-decoration: none;
+        transition: 0.2s all;
+
+        &:hover {
+            color: variables.$color-gray-dark;
+        }
+    }
+}

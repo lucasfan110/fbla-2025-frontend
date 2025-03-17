@@ -1,0 +1,12 @@
+@use "../sass/abstracts/variables";
+
+.notification {
+    background-color: red;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: variables.$color-white;
+}

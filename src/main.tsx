@@ -15,11 +15,12 @@ import ContainerLayout from "./layouts/ContainerLayout.tsx";
 import DashboardPage from "./pages/DashboardPage/index.tsx";
 import FinishSignUpPage from "./pages/FinishSignUpPage.tsx";
 import IndexPage from "./pages/IndexPage.tsx";
+import LogoutPage from "./pages/LogOutPage.tsx";
 import MyApplicationsPage from "./pages/MyApplicationsPage.tsx";
 import NewPostingPage from "./pages/NewPostingPage.tsx";
+import PostingApplicationsPage from "./pages/PostingApplicationsPage.tsx";
 import PostingDetailsPage from "./pages/PostingDetailsPage.tsx";
 import ValidateUser from "./pages/ValidateUser.tsx";
-import PostingApplicationsPage from "./pages/PostingApplicationsPage.tsx";
 
 mapboxgl.accessToken =
     "pk.eyJ1IjoibHVjYXNmYW4iLCJhIjoiY203bGlzeDBjMGJyeDJrcHRzOWFtMmVrciJ9.ispn4TNP3afN0jFC4npUEg";
@@ -62,6 +63,7 @@ const router = createHashRouter(
             </Route>
 
             <Route path="/finish-sign-up" element={<FinishSignUpPage />} />
+            <Route path="/log-out" element={<LogoutPage />} />
         </>
     )
 );

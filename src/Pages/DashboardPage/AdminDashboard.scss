@@ -1,0 +1,7 @@
+@use "../../sass/abstracts/variables";
+
+.admin-dashboard {
+    &__no-posting {
+        color: variables.$color-gray-3;
+    }
+}

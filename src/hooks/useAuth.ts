@@ -11,9 +11,11 @@ export default function useAuth() {
     const {
         state: { user },
         logIn,
+        logOut,
     } = useContext(UserAuthContext);
 
     const logInRef = useRef(logIn);
+    const logOutRef = useRef(logOut);
 
-    return { user, logIn: logInRef.current };
+    return { user, logIn: logInRef.current, logOut: logOutRef.current };
 }

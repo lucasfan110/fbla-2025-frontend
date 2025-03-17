@@ -5,10 +5,12 @@ import Button from "./Button";
 import "./PostingCard.scss";
 import StatusText from "./StatusText";
 import Tags from "./Tags";
+import Notification from "./Notification";
 
 interface Props extends Posting {
     showStatus?: boolean;
     readOnly?: boolean;
+    showApplicationCount?: boolean;
 }
 
 export default function PostingCard({
@@ -19,8 +21,10 @@ export default function PostingCard({
     image,
     description,
     status,
+    applicationCount,
     showStatus = true,
     readOnly = false,
+    showApplicationCount = false,
 }: Props) {
     const navigate = useNavigate();
 
@@ -52,6 +56,11 @@ export default function PostingCard({
                         ></h3>
 
                         {showStatus && <StatusText status={status} />}
+                        {showApplicationCount && (
+                            <Notification
+                                notificationCount={applicationCount}
+                            />
+                        )}
                     </div>
 
                     {!readOnly && (

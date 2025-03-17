@@ -13,6 +13,7 @@ interface Posting {
     tags?: string[];
     applications: string[];
     status: Status;
+    applicationCount: number;
 }
 
 export default Posting;

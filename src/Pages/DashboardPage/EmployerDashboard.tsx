@@ -42,7 +42,7 @@ export default function EmployerDashboard() {
             </div>
             {/* <input placeholder="Search..." /> */}
 
-            <PostingCardList postingsList={postings} />
+            <PostingCardList postingsList={postings} showApplicationCount />
 
             <Button
                 variation="primary"

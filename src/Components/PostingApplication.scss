@@ -1,3 +1,9 @@
 .posting-application {
     width: 50%;
+
+    &__form-input {
+        textarea {
+            field-sizing: content;
+        }
+    }
 }

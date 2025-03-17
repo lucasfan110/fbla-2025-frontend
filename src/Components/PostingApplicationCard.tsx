@@ -17,8 +17,8 @@ export default function PostingApplicationCard({
 
     async function updateApplicationStatus(status: Status) {
         const res = await backend.patch(
-            `/users/${user._id}/applications/${_id}`,
-            { status },
+            `/users/${user._id}/applications/${_id}/${status}`,
+            {},
             { headers: { Authorization: getAuthToken() } }
         );
 

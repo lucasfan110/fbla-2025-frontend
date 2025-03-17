@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import Button, { ButtonProps } from "../components/Button";
 import "./NotificationButton.scss";
+import Notification from "../components/Notification";
 
 interface Props extends ButtonProps {
     notificationCount: number;
@@ -16,11 +17,10 @@ export default function NotificationButton({
             className={classNames("notification-button", props.className)}
         >
             {props.children}
-            {notificationCount > 0 && (
-                <span className="notification-button__notification-count">
-                    {notificationCount}
-                </span>
-            )}
+            <Notification
+                notificationCount={notificationCount}
+                className="notification-button__notification-count"
+            />
         </Button>
     );
 }
