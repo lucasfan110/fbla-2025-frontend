@@ -2,7 +2,7 @@ import backend from "../api/backend";
 import { useAuthVerified } from "../hooks/useAuth";
 import { Application } from "../types/Application";
 import Status from "../types/Status";
-import getAuthToken from "../util/getAuthToken";
+import getAuthToken from "../utils/getAuthToken";
 import AcceptOrReject from "./AcceptOrReject";
 import "./PostingApplicationCard.scss";
 

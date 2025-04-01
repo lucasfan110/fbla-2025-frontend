@@ -1,0 +1,25 @@
+.posting-form {
+    margin: 2rem 0;
+
+    &__inputs-container {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    &__column {
+        width: 40rem;
+    }
+
+    &__form-input {
+        input {
+            width: 100%;
+        }
+
+        margin-bottom: 2rem;
+    }
+
+    &__submit-btn {
+        margin-top: 2rem;
+        width: 100%;
+    }
+}

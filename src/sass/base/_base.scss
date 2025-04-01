@@ -16,3 +16,63 @@ body {
     box-sizing: border-box;
     overflow-x: hidden;
 }
+
+.modal-close-button {
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+/* Modal overlay animation */
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+.ReactModal__Overlay--after-open {
+    opacity: 1;
+}
+.ReactModal__Overlay--before-close {
+    opacity: 0;
+}
+
+/* Modal content animation */
+.ReactModal__Content {
+    transform: translateY(-40%);
+    transition: transform 0.2s ease-in-out;
+}
+.ReactModal__Content--after-open {
+    transform: translateY(-50%);
+}
+.ReactModal__Content--before-close {
+    transform: translateY(-40%);
+}
+
+/* WebKit */
+*::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+    border: 1px solid #f0f0f0;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f0f0f0;
+}

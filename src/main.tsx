@@ -17,13 +17,15 @@ import FinishSignUpPage from "./pages/FinishSignUpPage.tsx";
 import IndexPage from "./pages/IndexPage.tsx";
 import LogoutPage from "./pages/LogOutPage.tsx";
 import MyApplicationsPage from "./pages/MyApplicationsPage.tsx";
-import NewPostingPage from "./pages/NewPostingPage.tsx";
 import PostingApplicationsPage from "./pages/PostingApplicationsPage.tsx";
 import PostingDetailsPage from "./pages/PostingDetailsPage.tsx";
 import ValidateUser from "./pages/ValidateUser.tsx";
+import Modal from "react-modal";
 
 mapboxgl.accessToken =
     "pk.eyJ1IjoibHVjYXNmYW4iLCJhIjoiY203bGlzeDBjMGJyeDJrcHRzOWFtMmVrciJ9.ispn4TNP3afN0jFC4npUEg";
+
+Modal.setAppElement("#root");
 
 const router = createHashRouter(
     createRoutesFromElements(
@@ -53,12 +55,12 @@ const router = createHashRouter(
                     path="/employer"
                     element={<ValidateUser userRole="employer" />}
                 >
-                    <Route element={<ContainerLayout />}>
+                    {/* <Route element={<ContainerLayout />}>
                         <Route
                             path="new-posting"
                             element={<NewPostingPage />}
                         />
-                    </Route>
+                    </Route> */}
                 </Route>
             </Route>
 

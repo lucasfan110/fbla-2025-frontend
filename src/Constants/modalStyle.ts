@@ -1,13 +1,13 @@
 import { Styles } from "react-modal";
 
+export const CLOSE_TIMEOUT_MS = 200;
+
 const modalStyle: Styles = {
     content: {
         top: "50%",
-        left: "50%",
+        left: "calc(50% - 45rem / 2)",
         right: "auto",
         bottom: "auto",
-        marginRight: "-50%",
-        transform: "translate(-50%, -50%)",
         width: "45rem",
         maxHeight: "80vh",
         padding: "6rem",

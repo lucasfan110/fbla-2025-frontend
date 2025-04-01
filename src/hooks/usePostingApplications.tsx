@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Application } from "../types/Application";
 import backend from "../api/backend";
 import { useAuthVerified } from "./useAuth";
-import getAuthToken from "../util/getAuthToken";
+import getAuthToken from "../utils/getAuthToken";
 
 export default function usePostingApplications(
     postingId: string,

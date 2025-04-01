@@ -3,7 +3,7 @@ import Button from "./Button";
 import FormTextArea from "./FormTextArea";
 import backend from "../api/backend";
 import { useAuthVerified } from "../hooks/useAuth";
-import getAuthToken from "../util/getAuthToken";
+import getAuthToken from "../utils/getAuthToken";
 import { useNavigate } from "react-router-dom";
 import "./PostingApplication.scss";
 

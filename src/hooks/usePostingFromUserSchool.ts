@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import backend from "../api/backend";
 import Posting from "../types/Posting";
-import getAuthToken from "../util/getAuthToken";
+import getAuthToken from "../utils/getAuthToken";
 import { useAuthVerified } from "./useAuth";
 
 export default function usePostingFromUserSchool(extraParams: object) {

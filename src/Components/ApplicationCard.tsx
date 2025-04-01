@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Application } from "../types/Application";
 import "./ApplicationCard.scss";
-import capitalize from "../util/capitalize";
+import capitalize from "../utils/capitalize";
 
 interface Props {
     application: Application;

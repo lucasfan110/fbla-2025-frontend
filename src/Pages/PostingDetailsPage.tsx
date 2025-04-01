@@ -10,7 +10,7 @@ import { useAuthVerified } from "../hooks/useAuth";
 import useMapDisplay from "../hooks/useMapDisplay";
 import Posting from "../types/Posting";
 import Status from "../types/Status";
-import getAuthToken from "../util/getAuthToken";
+import getAuthToken from "../utils/getAuthToken";
 import NotificationButton from "./NotificationButton";
 import "./PostingDetailsPage.scss";
 import Section from "./Section";

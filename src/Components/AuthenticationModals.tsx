@@ -1,29 +1,18 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import ReactModal from "react-modal";
-import modalStyle from "../constants/modalStyle";
+import modalStyle, { CLOSE_TIMEOUT_MS } from "../constants/modalStyle";
+import { UserAuthFormContext } from "../context/UserAuthFormContext";
+import usePreventScrolling from "../hooks/usePreventScrolling";
 import LogInPage from "../pages/LogInPage";
 import SignUpPage from "../pages/SignUpPage";
-import "./AuthenticationModals.scss";
 import Button from "./Button";
-import { UserAuthFormContext } from "../context/UserAuthFormContext";
 
 export default function AuthenticationModals() {
     const {
         state: { activeModal },
         closeModal,
     } = useContext(UserAuthFormContext);
-
-    useEffect(() => {
-        let overflow;
-
-        if (activeModal !== "none") {
-            overflow = "hidden";
-        } else {
-            overflow = "visible";
-        }
-
-        document.body.style.overflowY = overflow;
-    }, [activeModal]);
+    usePreventScrolling(activeModal !== "none");
 
     return (
         <>
@@ -33,6 +22,7 @@ export default function AuthenticationModals() {
                 style={modalStyle}
                 onRequestClose={closeModal}
                 shouldCloseOnOverlayClick={true}
+                closeTimeoutMS={CLOSE_TIMEOUT_MS}
             >
                 <Button onClick={closeModal} className="modal-close-button">
                     <i className="bi bi-x-lg modal-close-button__icon" />
@@ -45,6 +35,7 @@ export default function AuthenticationModals() {
                 style={modalStyle}
                 onRequestClose={closeModal}
                 shouldCloseOnOverlayClick={true}
+                closeTimeoutMS={CLOSE_TIMEOUT_MS}
             >
                 <Button onClick={closeModal} className="modal-close-button">
                     <i className="bi bi-x-lg modal-close-button__icon" />

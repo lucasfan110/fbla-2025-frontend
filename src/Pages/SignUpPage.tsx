@@ -5,7 +5,7 @@ import ErrorText from "../components/ErrorText";
 import "./SignUpPage.scss";
 import { UserAuthFormContext } from "../context/UserAuthFormContext";
 import useAuth from "../hooks/useAuth";
-import getGoogleAccountInfo from "../util/getGoogleAccountInfo";
+import getGoogleAccountInfo from "../utils/getGoogleAccountInfo";
 import backend from "../api/backend";
 
 export default function SignUpPage() {

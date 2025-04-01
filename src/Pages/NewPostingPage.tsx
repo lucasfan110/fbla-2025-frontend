@@ -1,52 +1,16 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Select from "react-select";
-import backend from "../api/backend";
-import Button from "../components/Button";
-import FormInput from "../components/FormInput";
-import FormTextArea from "../components/FormTextArea";
-import ResourceEditor from "../components/ResourceEditor";
-import TagInput from "../components/TagInput";
+import PostingForm from "../components/PostingForm";
 import { useAuthVerified } from "../hooks/useAuth";
-import useSchools, { schoolsToOptions } from "../hooks/useSchools";
-import Resource from "../types/Resource";
-import getAuthToken from "../util/getAuthToken";
+import * as PostingHelper from "../utils/postingsHelper";
 import "./NewPostingPage.scss";
 
-type FormData = {
-    name: string;
-    image?: string;
-    description?: string;
-    location?: string;
-    schools: string[];
-    resources?: Resource[];
-    tags?: string[];
-};
-
 export default function NewPostingPage() {
-    const [formData, setFormData] = useState<FormData>({
-        name: "",
-        schools: [],
-    });
     const { user } = useAuthVerified();
-    const navigate = useNavigate();
-    const schools = useSchools();
 
-    async function onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-
-        const res = await backend.post(
-            `/users/${user._id}/postings`,
-            formData,
-            {
-                headers: {
-                    Authorization: getAuthToken(),
-                },
-            }
-        );
+    async function onFormSubmit(formData: PostingHelper.FormData) {
+        const res = await PostingHelper.createPosting(user._id, formData);
 
         if (res.data.status === "success") {
-            navigate("/dashboard");
+            window.location.reload();
         } else {
             alert("Failed to create posting!");
         }
@@ -54,121 +18,9 @@ export default function NewPostingPage() {
 
     return (
         <div className="new-posting-page">
-            <form onSubmit={onFormSubmit} className="new-posting-page__form">
-                {/* 
-					A default submit button to prevent submitting when user 
-					press enter when typing on input due to the tag input 
-				*/}
-                <button
-                    type="submit"
-                    disabled
-                    style={{ display: "none" }}
-                    aria-hidden="true"
-                ></button>
+            <h2 className="new-posting-page__title">New Posting</h2>
 
-                <FormInput
-                    label="Name"
-                    placeholder="Name"
-                    id="name"
-                    className="new-posting-page__form-input"
-                    required
-                    value={formData.name}
-                    onChange={e => {
-                        setFormData({
-                            ...formData,
-                            name: e.target.value,
-                        });
-                    }}
-                />
-
-                <label className="form-input__label">
-                    Schools
-                    <span className="form-input__required">*</span>
-                </label>
-                <Select
-                    className="new-posting-page__select new-posting-page__form-input"
-                    options={schoolsToOptions(schools)}
-                    isMulti
-                    onChange={schools =>
-                        setFormData({
-                            ...formData,
-                            schools: schools.map(school => school.value),
-                        })
-                    }
-                    required
-                />
-
-                <FormTextArea
-                    label="Description"
-                    placeholder="Description"
-                    id="description"
-                    className="new-posting-page__form-input"
-                    value={formData.description}
-                    onChange={e => {
-                        setFormData({
-                            ...formData,
-                            description: e.target.value,
-                        });
-                    }}
-                />
-
-                <FormInput
-                    label="Image"
-                    placeholder="Put an image URL here..."
-                    id="image-url"
-                    className="new-posting-page__form-input"
-                    value={formData.image}
-                    onChange={e => {
-                        setFormData({
-                            ...formData,
-                            image: e.target.value,
-                        });
-                    }}
-                />
-
-                <FormInput
-                    label="Location"
-                    placeholder="Location"
-                    id="location"
-                    className="new-posting-page__form-input"
-                    value={formData.location}
-                    onChange={e => {
-                        setFormData({
-                            ...formData,
-                            location: e.target.value,
-                        });
-                    }}
-                />
-
-                <label className="form-input__label">Tags</label>
-                <TagInput
-                    id="tags"
-                    placeholder="Type in the tag and press enter to add tag..."
-                    tags={formData.tags}
-                    onTagsChange={tags => {
-                        setFormData(data => ({
-                            ...data,
-                            tags,
-                        }));
-                    }}
-                    className="new-posting-page__form-input"
-                />
-
-                <label className="form-input__label">Resources</label>
-                <ResourceEditor
-                    resources={formData.resources ?? []}
-                    setResources={resources =>
-                        setFormData({ ...formData, resources })
-                    }
-                />
-
-                <Button
-                    variation="primary"
-                    className="new-posting-page__submit-btn"
-                >
-                    Add Posting
-                </Button>
-            </form>
+            <PostingForm onFormSubmit={onFormSubmit} />
         </div>
     );
 }

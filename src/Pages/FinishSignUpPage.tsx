@@ -4,7 +4,7 @@ import Button from "../components/Button";
 import SchoolForm, { SchoolFormData } from "../components/SchoolForm";
 import UserSignUpForm, { SignUpFormData } from "../components/UserSignUpForm";
 import "./FinishSignUpPage.scss";
-import getGoogleAccountInfo from "../util/getGoogleAccountInfo";
+import getGoogleAccountInfo from "../utils/getGoogleAccountInfo";
 
 const DEFAULT_FORM_DATA: SignUpFormData = {
     role: "student",

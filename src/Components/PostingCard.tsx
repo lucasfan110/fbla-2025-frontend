@@ -1,16 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import sanitizeHTML from "sanitize-html";
+import { useAuthVerified } from "../hooks/useAuth";
 import Posting from "../types/Posting";
+import * as PostingHelper from "../utils/postingsHelper";
 import Button from "./Button";
+import Notification from "./Notification";
 import "./PostingCard.scss";
 import StatusText from "./StatusText";
 import Tags from "./Tags";
-import Notification from "./Notification";
 
 interface Props extends Posting {
     showStatus?: boolean;
     readOnly?: boolean;
     showApplicationCount?: boolean;
+    onEditPosting?: () => void;
 }
 
 export default function PostingCard({
@@ -25,8 +28,10 @@ export default function PostingCard({
     showStatus = true,
     readOnly = false,
     showApplicationCount = false,
+    onEditPosting,
 }: Props) {
     const navigate = useNavigate();
+    const { user } = useAuthVerified();
 
     return (
         <div
@@ -69,7 +74,7 @@ export default function PostingCard({
                                 className="posting-card__icon-button"
                                 onClick={e => {
                                     e.stopPropagation();
-                                    navigate(`/dashboard/postings/${_id}/edit`);
+                                    onEditPosting?.();
                                 }}
                             >
                                 <i className="bi bi-pencil-square"></i>
@@ -77,11 +82,13 @@ export default function PostingCard({
                             <Button
                                 className="posting-card__icon-button"
                                 variation="danger"
-                                onClick={e => {
-                                    e.stopPropagation();
-                                    navigate(
-                                        `/employer/postings/${_id}/delete`
+                                onClick={async event => {
+                                    event.stopPropagation();
+                                    await PostingHelper.deletePosting(
+                                        user._id,
+                                        _id
                                     );
+                                    window.location.reload();
                                 }}
                             >
                                 <i className="bi bi-trash3"></i>

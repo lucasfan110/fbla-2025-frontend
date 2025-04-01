@@ -3,7 +3,7 @@ import backend from "../api/backend";
 import ApplicationCard from "../components/ApplicationCard";
 import { useAuthVerified } from "../hooks/useAuth";
 import { Application } from "../types/Application";
-import getAuthToken from "../util/getAuthToken";
+import getAuthToken from "../utils/getAuthToken";
 import "./MyApplicationsPage.scss";
 
 export default function MyApplicationsPage() {
