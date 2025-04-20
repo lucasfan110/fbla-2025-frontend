@@ -1,6 +1,11 @@
+@use "../../sass/abstracts/variables";
+
 .student-dashboard {
+    margin: 2rem;
+
     &__heading {
         display: flex;
         justify-content: space-between;
+        margin-top: 2rem;
     }
 }

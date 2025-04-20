@@ -29,12 +29,12 @@ export default function EditPostingPage({ posting }: Props) {
 
     return (
         <div className="edit-posting-page">
-            <h2 className="edit-posting-page__title">Edit Posting</h2>
+            <h2 className="edit-posting-page__title">Edit Job Posting</h2>
 
             <PostingForm
                 initialFormData={initialFormData}
-                onFormSubmit={data => {
-                    PostingHelper.editPosting(
+                onFormSubmit={async data => {
+                    await PostingHelper.editPosting(
                         user._id,
                         posting?._id ?? "",
                         data

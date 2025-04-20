@@ -15,31 +15,33 @@ const UserProfileDropdown = forwardRef<HTMLDivElement, Props>(
                     {user.firstName} {user.lastName}
                 </h3>
 
-                <div className="user-profile-dropdown__icon-link">
+                {/* <Link
+                    className="user-profile-dropdown__icon-link"
+                    to="/profile"
+                >
                     <i className="bi bi-person user-profile-dropdown__icon" />
-                    <Link className="user-profile-dropdown__link" to="/profile">
-                        Profile
-                    </Link>
-                </div>
+                    <p className="user-profile-dropdown__link">Profile</p>
+                </Link> */}
 
                 {user.role === "student" && (
-                    <div className="user-profile-dropdown__icon-link">
+                    <Link
+                        className="user-profile-dropdown__icon-link"
+                        to="/my-applications"
+                    >
                         <i className="bi bi-window user-profile-dropdown__icon" />
-                        <Link
-                            className="user-profile-dropdown__link"
-                            to="/my-applications"
-                        >
+                        <p className="user-profile-dropdown__link">
                             My Applications
-                        </Link>
-                    </div>
+                        </p>
+                    </Link>
                 )}
 
-                <div className="user-profile-dropdown__icon-link">
+                <Link
+                    className="user-profile-dropdown__icon-link"
+                    to="/log-out"
+                >
                     <i className="bi bi-box-arrow-right user-profile-dropdown__icon" />
-                    <Link to="/log-out" className="user-profile-dropdown__link">
-                        Log out
-                    </Link>
-                </div>
+                    <p className="user-profile-dropdown__link">Log out</p>
+                </Link>
             </div>
         );
     }

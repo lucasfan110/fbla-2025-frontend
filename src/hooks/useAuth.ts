@@ -1,5 +1,5 @@
 import { useContext, useRef } from "react";
-import { UserAuthContext } from "../context/UserAuthContext";
+import { UserAuthContext } from "../contexts/UserAuthContext";
 import User from "../types/User";
 
 export function useAuthVerified() {

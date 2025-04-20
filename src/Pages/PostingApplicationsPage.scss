@@ -1,0 +1,9 @@
+@use "../sass/abstracts/variables";
+
+.posting-applications-page {
+    margin: 2rem;
+
+    &__no-applications-text {
+        color: variables.$color-gray-3;
+    }
+}

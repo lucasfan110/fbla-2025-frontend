@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import Button from "../components/Button";
 import ErrorText from "../components/ErrorText";
 import "./SignUpPage.scss";
-import { UserAuthFormContext } from "../context/UserAuthFormContext";
+import { UserAuthFormContext } from "../contexts/UserAuthFormContext";
 import useAuth from "../hooks/useAuth";
 import getGoogleAccountInfo from "../utils/getGoogleAccountInfo";
 import backend from "../api/backend";

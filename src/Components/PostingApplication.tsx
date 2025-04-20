@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Button from "./Button";
-import FormTextArea from "./FormTextArea";
+import { useNavigate } from "react-router-dom";
 import backend from "../api/backend";
 import { useAuthVerified } from "../hooks/useAuth";
 import getAuthToken from "../utils/getAuthToken";
-import { useNavigate } from "react-router-dom";
+import Button from "./Button";
+import FormTextArea from "./FormTextArea";
 import "./PostingApplication.scss";
 
 interface Props {
@@ -39,7 +39,7 @@ export default function PostingApplication({ postingId }: Props) {
 
     return (
         <div className="posting-application">
-            <form onSubmit={onFormSubmit}>
+            <form onSubmit={onFormSubmit} className="posting-application__form">
                 <FormTextArea
                     label="Why do you want to apply for this posting, and why do you think you are a good fit for it?"
                     placeholder="Type your answer here..."

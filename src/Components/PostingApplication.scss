@@ -1,3 +1,5 @@
+@use "../sass/abstracts/variables";
+
 .posting-application {
     width: 50%;
 
@@ -5,5 +7,11 @@
         textarea {
             field-sizing: content;
         }
+    }
+}
+
+@media screen and (max-width: variables.$shrink-size) {
+    .posting-application {
+        width: 100%;
     }
 }

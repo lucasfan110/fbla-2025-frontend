@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { UserAuthFormContext } from "../context/UserAuthFormContext";
+import { UserAuthFormContext } from "../contexts/UserAuthFormContext";
 import useAuth from "../hooks/useAuth";
 import Button from "./Button";
 import "./UserAuthentication.scss";

@@ -1,9 +1,9 @@
 import PostingCardList from "../../components/PostingCardList";
-import usePostingFromUserSchool from "../../hooks/usePostingFromUserSchool";
+import usePostingsFromUserSchool from "../../hooks/usePostingsFromUserSchool";
 import "./AdminDashboard.scss";
 
 export default function AdminDashboard() {
-    const pendingPostings = usePostingFromUserSchool({ status: "pending" });
+    const pendingPostings = usePostingsFromUserSchool({ status: "pending" });
 
     return (
         <div className="admin-dashboard">

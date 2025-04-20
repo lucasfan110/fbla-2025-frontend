@@ -1,17 +1,19 @@
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import mapboxgl from "mapbox-gl";
 import { createRoot } from "react-dom/client";
+import Modal from "react-modal";
 import {
     createHashRouter,
     createRoutesFromElements,
     Route,
     RouterProvider,
 } from "react-router-dom";
-import { UserAuthProvider } from "./context/UserAuthContext.ts";
-import { UserAuthFormProvider } from "./context/UserAuthFormContext.ts";
+import { UserAuthProvider } from "./contexts/UserAuthContext.ts";
+import { UserAuthFormProvider } from "./contexts/UserAuthFormContext.ts";
 import "./index.scss";
 import AppLayout from "./layouts/AppLayout.tsx";
 import ContainerLayout from "./layouts/ContainerLayout.tsx";
+import WithEditPostingWindow from "./layouts/WithEditPostingWindow.tsx";
 import DashboardPage from "./pages/DashboardPage/index.tsx";
 import FinishSignUpPage from "./pages/FinishSignUpPage.tsx";
 import IndexPage from "./pages/IndexPage.tsx";
@@ -20,7 +22,6 @@ import MyApplicationsPage from "./pages/MyApplicationsPage.tsx";
 import PostingApplicationsPage from "./pages/PostingApplicationsPage.tsx";
 import PostingDetailsPage from "./pages/PostingDetailsPage.tsx";
 import ValidateUser from "./pages/ValidateUser.tsx";
-import Modal from "react-modal";
 
 mapboxgl.accessToken =
     "pk.eyJ1IjoibHVjYXNmYW4iLCJhIjoiY203bGlzeDBjMGJyeDJrcHRzOWFtMmVrciJ9.ispn4TNP3afN0jFC4npUEg";
@@ -33,7 +34,10 @@ const router = createHashRouter(
             <Route path="/" element={<AppLayout />}>
                 <Route index element={<IndexPage />} />
                 <Route element={<ContainerLayout />}>
-                    <Route path="/dashboard">
+                    <Route
+                        path="/dashboard"
+                        element={<WithEditPostingWindow />}
+                    >
                         <Route index element={<DashboardPage />} />
                         <Route path="postings/:postingId">
                             <Route index element={<PostingDetailsPage />} />

@@ -20,6 +20,14 @@ export async function createPosting(userId: string, data: FormData) {
     });
 }
 
+export async function getPostings(userId: string, postingId: string) {
+    return backend.get(`/users/${userId}/postings/${postingId}`, {
+        headers: {
+            Authorization: getAuthToken(),
+        },
+    });
+}
+
 export async function editPosting(
     userId: string,
     postingId: string,

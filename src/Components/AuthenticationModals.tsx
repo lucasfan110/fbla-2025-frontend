@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import ReactModal from "react-modal";
 import modalStyle, { CLOSE_TIMEOUT_MS } from "../constants/modalStyle";
-import { UserAuthFormContext } from "../context/UserAuthFormContext";
+import { UserAuthFormContext } from "../contexts/UserAuthFormContext";
 import usePreventScrolling from "../hooks/usePreventScrolling";
 import LogInPage from "../pages/LogInPage";
 import SignUpPage from "../pages/SignUpPage";

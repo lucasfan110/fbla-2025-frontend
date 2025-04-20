@@ -1,9 +1,9 @@
 import PostingCardList from "../../components/PostingCardList";
-import usePostingFromUserSchool from "../../hooks/usePostingFromUserSchool";
+import usePostingsFromUserSchool from "../../hooks/usePostingsFromUserSchool";
 import "./StudentDashboard.scss";
 
 export default function StudentDashboard() {
-    const postings = usePostingFromUserSchool({ status: "approved" });
+    const postings = usePostingsFromUserSchool({ status: "approved" });
 
     return (
         <div className="student-dashboard">

@@ -18,7 +18,7 @@ export default function NewPostingPage() {
 
     return (
         <div className="new-posting-page">
-            <h2 className="new-posting-page__title">New Posting</h2>
+            <h2 className="new-posting-page__title">New Job Posting</h2>
 
             <PostingForm onFormSubmit={onFormSubmit} />
         </div>

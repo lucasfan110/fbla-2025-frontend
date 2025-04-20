@@ -1,4 +1,5 @@
 @use "../sass/abstracts/variables";
+@use "../sass/abstracts/mixins";
 
 .chatbot-window {
     &__button {
@@ -133,32 +134,29 @@
     }
 }
 
-// @media screen and (max-width: $shrink-size) {
-//     .chatbot-window {
-//         &__button {
-//             right: 1rem;
-//             bottom: 1rem;
-//             width: 6rem;
-//             height: 6rem;
-//             display: flex;
-//             align-items: center;
-//             justify-content: center;
-//             font-size: $font-size-medium;
-//         }
+@media screen and (max-width: variables.$shrink-size) {
+    .chatbot-window {
+        &__button {
+            @include mixins.static-button-mobile;
+            left: 1rem;
+            bottom: 1rem;
+        }
 
-//         &__window {
-//             width: 30rem;
-//             height: 49rem;
-//         }
+        &__window {
+            width: 30rem;
+            height: 49rem;
+            left: 2rem;
+            bottom: 2rem;
+        }
 
-//         &__input-form {
-//             padding: 0;
-//             padding-left: 1rem;
-//             gap: 0;
-//         }
+        &__input-form {
+            padding: 0 1rem;
+            gap: 0;
+        }
 
-//         &__input {
-//             width: 80%;
-//         }
-//     }
-// }
+        &__input {
+            width: 80%;
+            font-size: variables.$font-size-small;
+        }
+    }
+}

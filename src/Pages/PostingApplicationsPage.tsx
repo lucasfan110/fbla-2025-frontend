@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import PostingApplicationCard from "../components/PostingApplicationCard";
 import usePostingApplications from "../hooks/usePostingApplications";
+import "./PostingApplicationsPage.scss";
 
 export default function PostingApplicationsPage() {
     const { postingId = "" } = useParams();
@@ -10,6 +11,12 @@ export default function PostingApplicationsPage() {
 
     return (
         <div className="posting-applications-page">
+            {applications.length === 0 && (
+                <div className="posting-applications-page__no-applications-text">
+                    There are no pending applications for this posting!
+                </div>
+            )}
+
             {applications.map(application => (
                 <PostingApplicationCard
                     application={application}

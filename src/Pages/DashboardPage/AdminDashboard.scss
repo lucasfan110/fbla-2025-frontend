@@ -1,7 +1,15 @@
 @use "../../sass/abstracts/variables";
 
 .admin-dashboard {
+    padding-bottom: 5em;
+
     &__no-posting {
         color: variables.$color-gray-3;
+    }
+}
+
+@media screen and (max-width: variables.$shrink-size) {
+    .admin-dashboard {
+        margin: 0 2rem;
     }
 }

@@ -8,12 +8,13 @@ import Notification from "./Notification";
 import "./PostingCard.scss";
 import StatusText from "./StatusText";
 import Tags from "./Tags";
+import { useContext } from "react";
+import { EditPostingWindowContext } from "../contexts/EditPostingWindowContext";
 
 interface Props extends Posting {
     showStatus?: boolean;
     readOnly?: boolean;
     showApplicationCount?: boolean;
-    onEditPosting?: () => void;
 }
 
 export default function PostingCard({
@@ -28,10 +29,14 @@ export default function PostingCard({
     showStatus = true,
     readOnly = false,
     showApplicationCount = false,
-    onEditPosting,
 }: Props) {
     const navigate = useNavigate();
     const { user } = useAuthVerified();
+    const { state, openEditPostingWindow } = useContext(
+        EditPostingWindowContext
+    );
+
+    console.log(state);
 
     return (
         <div
@@ -51,7 +56,7 @@ export default function PostingCard({
                 />
             </div>
             <div className="posting-card__content">
-                <div className="posting-card__space-between">
+                <div className="posting-card__title-container">
                     <div className="posting-card__name-container">
                         <h3
                             className="posting-card__name"
@@ -59,42 +64,46 @@ export default function PostingCard({
                                 __html: sanitizeHTML(name),
                             }}
                         ></h3>
-
-                        {showStatus && <StatusText status={status} />}
-                        {showApplicationCount && (
-                            <Notification
-                                notificationCount={applicationCount}
-                            />
-                        )}
                     </div>
 
-                    {!readOnly && (
-                        <div className="posting-card__icon-buttons">
-                            <Button
-                                className="posting-card__icon-button"
-                                onClick={e => {
-                                    e.stopPropagation();
-                                    onEditPosting?.();
-                                }}
-                            >
-                                <i className="bi bi-pencil-square"></i>
-                            </Button>
-                            <Button
-                                className="posting-card__icon-button"
-                                variation="danger"
-                                onClick={async event => {
-                                    event.stopPropagation();
-                                    await PostingHelper.deletePosting(
-                                        user._id,
-                                        _id
-                                    );
-                                    window.location.reload();
-                                }}
-                            >
-                                <i className="bi bi-trash3"></i>
-                            </Button>
+                    <div className="posting-card__extra-info-container">
+                        <div className="posting-card__extra-info">
+                            {showStatus && <StatusText status={status} />}
+                            {showApplicationCount && (
+                                <Notification
+                                    notificationCount={applicationCount}
+                                />
+                            )}
                         </div>
-                    )}
+
+                        {!readOnly && (
+                            <div className="posting-card__icon-buttons">
+                                <Button
+                                    className="posting-card__icon-button"
+                                    onClick={e => {
+                                        e.stopPropagation();
+                                        openEditPostingWindow(_id);
+                                    }}
+                                >
+                                    <i className="bi bi-pencil-square"></i>
+                                </Button>
+                                <Button
+                                    className="posting-card__icon-button"
+                                    variation="danger"
+                                    onClick={async event => {
+                                        event.stopPropagation();
+                                        await PostingHelper.deletePosting(
+                                            user._id,
+                                            _id
+                                        );
+                                        window.location.reload();
+                                    }}
+                                >
+                                    <i className="bi bi-trash3"></i>
+                                </Button>
+                            </div>
+                        )}
+                    </div>
                 </div>
                 <div className="posting-card__location">{location}</div>
                 {/* <div className="posting-card__contact-info">

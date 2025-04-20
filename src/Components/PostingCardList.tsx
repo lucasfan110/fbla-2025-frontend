@@ -6,7 +6,6 @@ interface Props {
     showStatus?: boolean;
     readOnly?: boolean;
     showApplicationCount?: boolean;
-    onEditPosting?: (postingIndex: number) => void;
 }
 
 export default function PostingCardList({
@@ -14,15 +13,13 @@ export default function PostingCardList({
     showStatus,
     readOnly,
     showApplicationCount,
-    onEditPosting,
 }: Props) {
-    return postingsList.map((posting, index) => (
+    return postingsList.map(posting => (
         <PostingCard
             key={posting._id}
             showStatus={showStatus}
             readOnly={readOnly}
             showApplicationCount={showApplicationCount}
-            onEditPosting={() => onEditPosting?.(index)}
             {...posting}
         />
     ));

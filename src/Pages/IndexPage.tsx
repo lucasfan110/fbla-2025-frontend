@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import Button from "../components/Button";
-import { UserAuthFormContext } from "../context/UserAuthFormContext";
+import { UserAuthFormContext } from "../contexts/UserAuthFormContext";
 import "./IndexPage.scss";
 import useAuth from "../hooks/useAuth";
 import { Navigate } from "react-router-dom";

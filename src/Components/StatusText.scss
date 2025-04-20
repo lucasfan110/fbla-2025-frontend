@@ -17,3 +17,10 @@
         background-color: variables.$color-invalid;
     }
 }
+
+@media screen and (max-width: variables.$shrink-size) {
+    .status-text {
+        font-size: variables.$font-size-extra-small;
+        padding: 4px 1.5rem;
+    }
+}

@@ -1,10 +1,6 @@
 @use "../sass/abstracts/variables";
 
 .posting-details-page {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
     min-width: 100%;
     padding-bottom: 10rem;
     margin-top: 2rem;
@@ -14,6 +10,13 @@
         overflow: hidden;
         position: relative;
         min-width: 100%;
+    }
+
+    &__content-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
     }
 
     &__name-container {
@@ -102,5 +105,14 @@
 
     &__view-applications-btn {
         margin-top: 2rem;
+    }
+}
+
+@media screen and (max-width: variables.$shrink-size) {
+    .posting-details-page {
+        &__content-container {
+            padding: 0 2rem;
+            padding-bottom: 10rem;
+        }
     }
 }

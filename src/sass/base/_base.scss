@@ -1,3 +1,5 @@
+@use "../abstracts/variables";
+
 *,
 *::after,
 *::before {
@@ -40,14 +42,21 @@ body {
 
 /* Modal content animation */
 .ReactModal__Content {
-    transform: translateY(-40%);
+    transform: translate(-50%, -40%);
     transition: transform 0.2s ease-in-out;
+    width: 45rem;
 }
 .ReactModal__Content--after-open {
-    transform: translateY(-50%);
+    transform: translate(-50%, -50%);
 }
 .ReactModal__Content--before-close {
-    transform: translateY(-40%);
+    transform: translate(-50%, -40%);
+}
+
+@media screen and (max-width: variables.$shrink-size) {
+    .ReactModal__Content {
+        width: 90vw;
+    }
 }
 
 /* WebKit */

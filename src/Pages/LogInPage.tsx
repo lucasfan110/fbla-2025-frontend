@@ -6,7 +6,7 @@ import Button from "../components/Button";
 import ErrorText from "../components/ErrorText";
 import FormInput from "../components/FormInput";
 import SeparatorWithElement from "../components/SeparatorWithElement";
-import { UserAuthFormContext } from "../context/UserAuthFormContext";
+import { UserAuthFormContext } from "../contexts/UserAuthFormContext";
 import useAuth from "../hooks/useAuth";
 import "./LogInPage.scss";
 

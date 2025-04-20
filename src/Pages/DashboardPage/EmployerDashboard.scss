@@ -1,9 +1,13 @@
+@use "../../sass/abstracts/variables";
+@use "../../sass/abstracts/mixins";
+
 .employer-dashboard {
     margin-bottom: 10rem;
 
     &__title {
         display: flex;
         justify-content: space-between;
+        margin: 2rem;
         margin-top: 2rem;
     }
 
@@ -15,5 +19,15 @@
         width: 8rem;
         height: 8rem;
         border-radius: 50%;
+    }
+}
+
+@media screen and (max-width: variables.$shrink-size) {
+    .employer-dashboard {
+        &__add-posting-btn {
+            @include mixins.static-button-mobile;
+            right: 1rem;
+            bottom: 1rem;
+        }
     }
 }

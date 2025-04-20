@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Application } from "../types/Application";
-import "./ApplicationCard.scss";
 import capitalize from "../utils/capitalize";
+import "./ApplicationCard.scss";
+import Button from "./Button";
 
 interface Props {
     application: Application;
@@ -32,6 +33,13 @@ export default function ApplicationCard({ application }: Props) {
                 <strong>Status: </strong>
                 {capitalize(application.status)}
             </div>
+
+            <Button
+                variation="primary"
+                className="application-card__check-posting-btn"
+            >
+                Check Posting
+            </Button>
         </div>
     );
 }

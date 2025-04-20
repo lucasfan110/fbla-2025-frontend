@@ -8,13 +8,6 @@
     flex-wrap: wrap;
     font-size: variables.$font-size-small;
 
-    &--compacted {
-        max-height: 2.6rem;
-        overflow-y: hidden;
-        gap: 4px;
-        font-size: variables.$font-size-extra-small;
-    }
-
     &__tag {
         display: flex;
         align-items: center;
@@ -31,5 +24,7 @@
 @media screen and (max-width: variables.$shrink-size) {
     .tags {
         font-size: variables.$font-size-extra-small;
+        max-height: 2.6rem;
+        overflow-y: hidden;
     }
 }

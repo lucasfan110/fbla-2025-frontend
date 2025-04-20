@@ -6,6 +6,10 @@ export default function TextArea({
     ...props
 }: React.ComponentProps<"textarea">) {
     return (
-        <textarea className={classNames("text-area", className)} {...props} />
+        <textarea
+            className={classNames("text-area", className)}
+            rows={5}
+            {...props}
+        />
     );
 }
