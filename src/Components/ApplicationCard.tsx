@@ -3,6 +3,7 @@ import { Application } from "../types/Application";
 import capitalize from "../utils/capitalize";
 import "./ApplicationCard.scss";
 import Button from "./Button";
+import PdfDisplay from "./PdfDisplay";
 
 interface Props {
     application: Application;
@@ -33,6 +34,9 @@ export default function ApplicationCard({ application }: Props) {
                 <strong>Status: </strong>
                 {capitalize(application.status)}
             </div>
+
+            <div className="application-card__resume-title">Resume: </div>
+            <PdfDisplay file={application.pdf.data} />
 
             <Button
                 variation="primary"

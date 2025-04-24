@@ -40,7 +40,15 @@
     }
 
     &__justify-center {
+        gap: 3rem;
+        display: flex;
         justify-content: center;
+        flex: 1;
+    }
+
+    &__link {
+        text-decoration: none;
+        color: variables.$color-gray-2;
     }
 
     &__justify-right {

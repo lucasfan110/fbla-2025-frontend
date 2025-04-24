@@ -9,8 +9,6 @@ export default function usePosting(postingId: string | null) {
 
     useEffect(() => {
         (async () => {
-            console.log("from hook", postingId);
-
             if (!postingId) {
                 setPosting(null);
                 return;

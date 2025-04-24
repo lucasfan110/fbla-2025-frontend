@@ -10,4 +10,9 @@ export interface Application {
     };
     response: string;
     status: Status;
+    pdf: {
+        data: File;
+        contentType: string;
+        filename: string;
+    };
 }

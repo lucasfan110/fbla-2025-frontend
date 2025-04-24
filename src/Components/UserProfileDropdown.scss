@@ -31,6 +31,10 @@
         color: variables.$color-primary;
     }
 
+    &__student-management-link {
+        font-size: variables.$font-size-small;
+    }
+
     a {
         color: variables.$color-gray-2;
         text-decoration: none;

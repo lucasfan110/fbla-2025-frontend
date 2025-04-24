@@ -1,0 +1,10 @@
+.student-management-page {
+    margin: 2rem;
+
+    &__student-list {
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+}

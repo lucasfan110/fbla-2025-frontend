@@ -4,6 +4,7 @@ import { Application } from "../types/Application";
 import Status from "../types/Status";
 import getAuthToken from "../utils/getAuthToken";
 import AcceptOrReject from "./AcceptOrReject";
+import PdfDisplay from "./PdfDisplay";
 import "./PostingApplicationCard.scss";
 
 interface Props {
@@ -11,7 +12,7 @@ interface Props {
 }
 
 export default function PostingApplicationCard({
-    application: { student, response, _id },
+    application: { student, response, _id, pdf },
 }: Props) {
     const { user } = useAuthVerified();
 
@@ -49,6 +50,11 @@ export default function PostingApplicationCard({
             <p>
                 <strong>Response: </strong> {response}
             </p>
+
+            <p>
+                <strong>Resume: </strong>
+            </p>
+            <PdfDisplay file={pdf.data} />
 
             <AcceptOrReject onClick={updateApplicationStatus} />
         </div>

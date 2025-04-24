@@ -1,0 +1,14 @@
+@use "../sass/abstracts/variables";
+
+.pdf-display {
+    margin-top: 1rem;
+    max-height: 40rem;
+    overflow-y: scroll;
+    width: fit-content;
+    border: 1px solid variables.$color-gray-1;
+    background-color: variables.$color-gray-lighter;
+
+    &__resume-page {
+        margin: 2rem;
+    }
+}

@@ -1,3 +1,9 @@
+@use "../abstracts/variables";
+
 .u-no-animation {
     animation-duration: 0s !important;
+}
+
+.u-gray-text {
+    color: variables.$color-gray-3;
 }

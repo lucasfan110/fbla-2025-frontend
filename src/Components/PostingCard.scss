@@ -119,7 +119,7 @@
 @media screen and (max-width: variables.$shrink-size) {
     .posting-card {
         flex-direction: column;
-        height: 43rem;
+        height: fit-content;
 
         &__thumbnail-container {
             width: 100%;

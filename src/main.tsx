@@ -2,6 +2,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import mapboxgl from "mapbox-gl";
 import { createRoot } from "react-dom/client";
 import Modal from "react-modal";
+import { pdfjs } from "react-pdf";
 import {
     createHashRouter,
     createRoutesFromElements,
@@ -22,9 +23,12 @@ import MyApplicationsPage from "./pages/MyApplicationsPage.tsx";
 import PostingApplicationsPage from "./pages/PostingApplicationsPage.tsx";
 import PostingDetailsPage from "./pages/PostingDetailsPage.tsx";
 import ValidateUser from "./pages/ValidateUser.tsx";
+import StudentManagementPage from "./pages/StudentManagementPage.tsx";
 
 mapboxgl.accessToken =
     "pk.eyJ1IjoibHVjYXNmYW4iLCJhIjoiY203bGlzeDBjMGJyeDJrcHRzOWFtMmVrciJ9.ispn4TNP3afN0jFC4npUEg";
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 Modal.setAppElement("#root");
 
@@ -65,6 +69,18 @@ const router = createHashRouter(
                             element={<NewPostingPage />}
                         />
                     </Route> */}
+                </Route>
+
+                <Route
+                    path="/admin"
+                    element={<ValidateUser userRole="admin" />}
+                >
+                    <Route element={<ContainerLayout />}>
+                        <Route
+                            path="student-management"
+                            element={<StudentManagementPage />}
+                        />
+                    </Route>
                 </Route>
             </Route>
 

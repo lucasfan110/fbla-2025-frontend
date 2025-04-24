@@ -12,7 +12,7 @@ export default function PostingApplicationsPage() {
     return (
         <div className="posting-applications-page">
             {applications.length === 0 && (
-                <div className="posting-applications-page__no-applications-text">
+                <div className="u-gray-text">
                     There are no pending applications for this posting!
                 </div>
             )}

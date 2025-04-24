@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import sanitizeHTML from "sanitize-html";
+import { EditPostingWindowContext } from "../contexts/EditPostingWindowContext";
 import { useAuthVerified } from "../hooks/useAuth";
 import Posting from "../types/Posting";
 import * as PostingHelper from "../utils/postingsHelper";
@@ -8,8 +10,6 @@ import Notification from "./Notification";
 import "./PostingCard.scss";
 import StatusText from "./StatusText";
 import Tags from "./Tags";
-import { useContext } from "react";
-import { EditPostingWindowContext } from "../contexts/EditPostingWindowContext";
 
 interface Props extends Posting {
     showStatus?: boolean;
@@ -32,11 +32,7 @@ export default function PostingCard({
 }: Props) {
     const navigate = useNavigate();
     const { user } = useAuthVerified();
-    const { state, openEditPostingWindow } = useContext(
-        EditPostingWindowContext
-    );
-
-    console.log(state);
+    const { openEditPostingWindow } = useContext(EditPostingWindowContext);
 
     return (
         <div

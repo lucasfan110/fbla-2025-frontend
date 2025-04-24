@@ -10,6 +10,8 @@ export default function MyApplicationsPage() {
     const { user } = useAuthVerified();
     const [applications, setApplications] = useState<Application[]>([]);
 
+    console.log(applications);
+
     useEffect(() => {
         (async () => {
             const res = await backend.get(`/users/${user._id}/applications`, {
@@ -33,6 +35,13 @@ export default function MyApplicationsPage() {
             >
                 Back to Dashboard
             </Button> */}
+
+            {applications.length === 0 && (
+                <div className="u-gray-text">
+                    You don't have any applications! Apply for a posting by
+                    clicking into a posting and apply from there!
+                </div>
+            )}
 
             {applications.map(application => (
                 <ApplicationCard
