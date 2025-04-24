@@ -9,12 +9,15 @@ import Posting from "../../types/Posting";
 import getAuthToken from "../../utils/getAuthToken";
 import NewPostingPage from "../NewPostingPage";
 import "./EmployerDashboard.scss";
+import usePreventScrolling from "../../hooks/usePreventScrolling";
 
 export default function EmployerDashboard() {
     const { user } = useAuthVerified();
 
     const [postings, setPostings] = useState<Posting[]>([]);
     const [showNewPostingPage, setShowNewPostingPage] = useState(false);
+
+    usePreventScrolling(showNewPostingPage);
 
     useEffect(() => {
         (async () => {

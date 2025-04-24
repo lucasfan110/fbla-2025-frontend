@@ -159,5 +159,13 @@
         &__extra-info {
             gap: 1rem;
         }
+
+        &__location {
+            line-clamp: 1;
+            -webkit-line-clamp: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
     }
 }
