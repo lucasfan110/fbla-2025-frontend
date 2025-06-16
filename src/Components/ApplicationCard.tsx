@@ -3,7 +3,7 @@ import { Application } from "../types/Application";
 import capitalize from "../utils/capitalize";
 import "./ApplicationCard.scss";
 import Button from "./Button";
-import PdfDisplay from "./PdfDisplay";
+import ResumeDisplay from "./ResumeDisplay";
 
 interface Props {
     application: Application;
@@ -36,7 +36,10 @@ export default function ApplicationCard({ application }: Props) {
             </div>
 
             <div className="application-card__resume-title">Resume: </div>
-            <PdfDisplay file={application.pdf.data} />
+            <ResumeDisplay
+                applicationId={application._id}
+                fileName={application.resumeFile.filename}
+            />
 
             <Button
                 variation="primary"

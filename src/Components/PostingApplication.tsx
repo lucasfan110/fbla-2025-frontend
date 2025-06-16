@@ -69,7 +69,7 @@ export default function PostingApplication({ postingId }: Props) {
                 <FormInput
                     label="Upload Resume"
                     type="file"
-                    accept="application/pdf"
+                    accept="application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                     required
                     onChange={handleFileChange}
                 />

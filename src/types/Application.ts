@@ -10,7 +10,7 @@ export interface Application {
     };
     response: string;
     status: Status;
-    pdf: {
+    resumeFile: {
         data: File;
         contentType: string;
         filename: string;

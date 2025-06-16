@@ -6,6 +6,7 @@ import AcceptOrReject from "../components/AcceptOrReject";
 import Button from "../components/Button";
 import PostingApplication from "../components/PostingApplication";
 import Tags from "../components/Tags";
+import { EditPostingWindowContext } from "../contexts/EditPostingWindowContext";
 import { useAuthVerified } from "../hooks/useAuth";
 import useMapDisplay from "../hooks/useMapDisplay";
 import usePosting from "../hooks/usePosting";
@@ -14,7 +15,6 @@ import getAuthToken from "../utils/getAuthToken";
 import NotificationButton from "./NotificationButton";
 import "./PostingDetailsPage.scss";
 import Section from "./Section";
-import { EditPostingWindowContext } from "../contexts/EditPostingWindowContext";
 
 export default function PostingDetailsPage() {
     const { postingId = "" } = useParams();
