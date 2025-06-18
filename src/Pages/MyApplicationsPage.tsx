@@ -5,15 +5,16 @@ import { useAuthVerified } from "../hooks/useAuth";
 import { Application } from "../types/Application";
 import getAuthToken from "../utils/getAuthToken";
 import "./MyApplicationsPage.scss";
+import LoadingText from "../components/LoadingText";
 
 export default function MyApplicationsPage() {
     const { user } = useAuthVerified();
     const [applications, setApplications] = useState<Application[]>([]);
-
-    console.log(applications);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         (async () => {
+            setIsLoading(true);
             const res = await backend.get(`/users/${user._id}/applications`, {
                 headers: {
                     Authorization: getAuthToken(),
@@ -22,26 +23,27 @@ export default function MyApplicationsPage() {
 
             if (res.data.status === "success") {
                 setApplications(res.data.data.applications);
+                setIsLoading(false);
             }
         })();
     }, [user]);
 
-    return (
-        <div className="my-applications-page">
-            {/* <Button
-                variation="primary"
-                onClick={() => navigate("/dashboard")}
-                className="my-applications-page__back-btn"
-            >
-                Back to Dashboard
-            </Button> */}
-
-            {applications.length === 0 && (
+    function renderHintText() {
+        if (isLoading) {
+            return <LoadingText animated />;
+        } else if (applications.length === 0) {
+            return (
                 <div className="u-gray-text">
                     You don't have any applications! Apply for a posting by
                     clicking into a posting and apply from there!
                 </div>
-            )}
+            );
+        }
+    }
+
+    return (
+        <div className="my-applications-page">
+            {renderHintText()}
 
             {applications.map(application => (
                 <ApplicationCard

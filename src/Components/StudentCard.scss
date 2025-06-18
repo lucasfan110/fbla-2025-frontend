@@ -23,7 +23,7 @@
         gap: 2rem;
     }
 
-    &__second-row {
+    &__first-row {
         display: flex;
         justify-content: space-between;
     }
@@ -31,5 +31,19 @@
     &__delete-btn {
         padding: 1rem;
         font-size: variables.$font-size-small;
+    }
+}
+
+@media screen and (max-width: variables.$shrink-size) {
+    .student-card {
+        &__row {
+            margin: 1.5rem 0;
+        }
+
+        &__extra-info-container {
+            flex-direction: column;
+            gap: 3px;
+            align-items: initial;
+        }
     }
 }

@@ -7,8 +7,10 @@ export default function AdminDashboard() {
 
     return (
         <div className="admin-dashboard">
-            <h2 style={{ textAlign: "center" }}>Admin Dashboard</h2>
-            <h2>Postings to Approve...</h2>
+            <h1 className="admin-dashboard__title">Admin Dashboard</h1>
+            <h2 className="admin-dashboard__subtitle">
+                Postings to Approve...
+            </h2>
 
             {pendingPostings.length === 0 && (
                 <p className="admin-dashboard__no-posting">

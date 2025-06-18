@@ -3,6 +3,15 @@
 .admin-dashboard {
     padding-bottom: 5em;
 
+    &__title {
+        margin-top: 2rem;
+        text-align: center;
+    }
+
+    &__subtitle {
+        margin-top: 4rem;
+    }
+
     &__no-posting {
         color: variables.$color-gray-3;
     }

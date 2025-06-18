@@ -1,3 +1,4 @@
+import React from "react";
 import backend from "../api/backend";
 import User from "../types/User";
 import getAuthToken from "../utils/getAuthToken";
@@ -9,11 +10,14 @@ interface Props {
 }
 
 export default function StudentCard({ student }: Props) {
-    async function deleteStudent() {
+    async function onDeleteButtonClick(
+        event: React.MouseEvent<HTMLButtonElement>
+    ) {
+        event.stopPropagation();
+
         await backend.delete(`/students/${student._id}`, {
             headers: { Authorization: getAuthToken() },
         });
-
         document.location.reload();
     }
 
@@ -21,12 +25,20 @@ export default function StudentCard({ student }: Props) {
         <div className="student-card">
             <i className="bi bi-people student-card__icon" />
             <div className="student-card__info-container">
-                <div className="student-card__row">
+                <div className="student-card__row student-card__first-row">
                     <h3 className="student-card__name">
                         {student.firstName} {student.lastName}
                     </h3>
+
+                    <Button
+                        className="student-card__delete-btn"
+                        variation="danger"
+                        onClick={onDeleteButtonClick}
+                    >
+                        <i className="bi bi-trash3"></i>
+                    </Button>
                 </div>
-                <div className="student-card__row student-card__second-row">
+                <div className="student-card__row">
                     <div className="student-card__extra-info-container">
                         <div>
                             <i className="bi bi-envelope" /> {student.email}
@@ -40,17 +52,6 @@ export default function StudentCard({ student }: Props) {
                             {student.grade}
                         </div>
                     </div>
-
-                    <Button
-                        className="student-card__delete-btn"
-                        variation="danger"
-                        onClick={async event => {
-                            event.stopPropagation();
-                            await deleteStudent();
-                        }}
-                    >
-                        <i className="bi bi-trash3"></i>
-                    </Button>
                 </div>
             </div>
         </div>
