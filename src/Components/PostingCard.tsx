@@ -114,7 +114,12 @@ export default function PostingCard({
                         {email}
                     </div>
                 </div> */}
-                <div className="posting-card__summary">{description}</div>
+                <div
+                    className="posting-card__summary"
+                    dangerouslySetInnerHTML={{
+                        __html: sanitizeHTML(description || ""),
+                    }}
+                />
                 <div className="posting-card__tags">
                     <Tags tags={tags} />
                 </div>
