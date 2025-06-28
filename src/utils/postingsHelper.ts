@@ -10,6 +10,7 @@ export type FormData = {
     schools: string[];
     resources?: Resource[];
     tags?: string[];
+    hourlySalary?: number;
 };
 
 export async function createPosting(userId: string, data: FormData) {

@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import backend from "../api/backend";
 import { useAuthVerified } from "../hooks/useAuth";
 import { Application } from "../types/Application";
@@ -7,8 +8,15 @@ import AcceptOrReject from "./AcceptOrReject";
 import "./PostingApplicationCard.scss";
 import ResumeDisplay from "./ResumeDisplay";
 
+export interface AIResult {
+    applicantId: string;
+    rank: number;
+    rationale: string;
+}
+
 interface Props {
     application: Application;
+    aiResult?: AIResult;
 }
 
 export default function PostingApplicationCard({
@@ -18,6 +26,7 @@ export default function PostingApplicationCard({
         _id,
         resumeFile: { filename },
     },
+    aiResult,
 }: Props) {
     const { user } = useAuthVerified();
 
@@ -36,7 +45,27 @@ export default function PostingApplicationCard({
     }
 
     return (
-        <div className="posting-application-card">
+        <div
+            className={classNames("posting-application-card", {
+                "ai-ranked": aiResult !== undefined,
+            })}
+        >
+            {aiResult !== undefined && (
+                <div className="posting-application-card__ai-result">
+                    <div className="posting-application-card__ai-result-title-container">
+                        <h3>AI Ranking: </h3>
+                    </div>
+                    <p>
+                        <strong>Rank: </strong>
+                        {aiResult.rank}
+                    </p>
+                    <p>
+                        <strong>Rationale: </strong>
+                        {aiResult.rationale}
+                    </p>
+                </div>
+            )}
+
             <h3>
                 {student.firstName} {student.lastName}
             </h3>

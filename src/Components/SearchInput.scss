@@ -1,0 +1,19 @@
+@use "../sass/abstracts/variables";
+
+.search-input {
+    &__container {
+        display: flex;
+        align-items: center;
+        border: 1px solid variables.$color-gray-3;
+        border-radius: 5px;
+        padding: 5px 1.5rem;
+        margin-top: 1rem;
+        background-color: variables.$color-white;
+    }
+
+    &__input {
+        width: 100%;
+        border: none;
+        background-color: variables.$color-white;
+    }
+}

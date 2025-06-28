@@ -30,7 +30,7 @@ export default function MyApplicationsPage() {
 
     function renderHintText() {
         if (isLoading) {
-            return <LoadingText animated />;
+            return <LoadingText />;
         } else if (applications.length === 0) {
             return (
                 <div className="u-gray-text">

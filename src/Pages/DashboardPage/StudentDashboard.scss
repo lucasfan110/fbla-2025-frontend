@@ -5,16 +5,8 @@
 
     &__search-input-container {
         display: flex;
-        align-items: center;
-        border: 1px solid variables.$color-gray-3;
-        border-radius: 5px;
-        padding: 5px 1.5rem;
-        margin-top: 1rem;
-    }
-
-    &__search-input {
-        width: 100%;
-        border: none;
+        flex-direction: column;
+        gap: 2rem;
     }
 
     &__heading {

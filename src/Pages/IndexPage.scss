@@ -2,6 +2,8 @@
 @use "../sass/abstracts/mixins";
 
 .index-page {
+    background-color: variables.$color-white;
+
     &__split {
         display: flex;
         gap: 2rem;
@@ -14,6 +16,9 @@
 
     &__split-container {
         flex: 1 1 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     img {
@@ -22,7 +27,8 @@
 
     &__introduction {
         @include mixins.container;
-        margin-top: 5rem;
+
+        padding-top: 5rem;
         margin-bottom: 10rem;
 
         h2 {
@@ -44,10 +50,6 @@
         background-color: variables.$color-primary;
         color: variables.$color-white;
         padding: 5rem 0;
-
-        h2 {
-            text-align: center;
-        }
     }
 
     &__details-container {
@@ -56,6 +58,73 @@
 
     &__details-row-1 {
         margin: 5rem 0;
+    }
+
+    &__faqs {
+        padding: 5rem;
+    }
+}
+
+.features-section {
+    background-color: #f3f4f6; // Tailwind's bg-gray-100
+    padding: 3rem 0;
+
+    @media (min-width: 768px) {
+        padding: 5rem 0;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        font-weight: 700;
+        text-align: center;
+        color: #1f2937; // Tailwind's text-gray-800
+        margin-bottom: 3rem;
+
+        @media (min-width: 768px) {
+            font-size: 2.5rem;
+        }
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .feature-card {
+        background-color: white;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+
+        .icon {
+            color: #4f46e5; // Tailwind's indigo-600
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-description {
+            color: #4b5563; // Tailwind's text-gray-600
+            font-size: 1rem;
+        }
     }
 }
 

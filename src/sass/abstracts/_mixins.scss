@@ -6,12 +6,17 @@
 }
 
 @mixin card {
-    border: 2px solid variables.$color-black;
+    transition: 0.2s all ease-in-out;
     background-color: variables.$color-gray-light;
     margin: 2rem 0;
     padding: 2rem;
     border-radius: 2rem;
     cursor: pointer;
+    box-shadow: 0 1rem 4rem variables.$color-box-shadow;
+
+    &:hover {
+        transform: scale(1.01);
+    }
 }
 
 @mixin static-button-mobile {

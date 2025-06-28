@@ -17,6 +17,7 @@ html {
 body {
     box-sizing: border-box;
     overflow-x: hidden;
+    background-color: variables.$color-gray-lighter;
 }
 
 .modal-close-button {

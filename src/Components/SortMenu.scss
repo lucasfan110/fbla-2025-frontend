@@ -1,0 +1,22 @@
+@use "../sass/abstracts/variables";
+
+.sort-menu {
+    display: flex;
+    gap: 2rem;
+
+    &__select {
+        font-family: inherit;
+        font-size: variables.$font-size-small;
+        padding: 5px 1rem;
+        background: none;
+        color: variables.$color-primary;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0rem 0rem 1rem variables.$color-box-shadow;
+        cursor: pointer;
+    }
+
+    &__icon {
+        margin-right: 1rem;
+    }
+}

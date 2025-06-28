@@ -36,15 +36,26 @@ const UserProfileDropdown = forwardRef<HTMLDivElement, Props>(
                 )}
 
                 {user.role === "admin" && (
-                    <Link
-                        className="user-profile-dropdown__icon-link"
-                        to="/admin/student-management"
-                    >
-                        <i className="bi bi-people user-profile-dropdown__icon" />
-                        <p className="user-profile-dropdown__link user-profile-dropdown__student-management-link">
-                            Student Management
-                        </p>
-                    </Link>
+                    <>
+                        <Link
+                            className="user-profile-dropdown__icon-link"
+                            to="/admin/student-management"
+                        >
+                            <i className="bi bi-people user-profile-dropdown__icon" />
+                            <p className="user-profile-dropdown__link user-profile-dropdown__student-management-link">
+                                Student Management
+                            </p>
+                        </Link>
+                        <Link
+                            className="user-profile-dropdown__icon-link"
+                            to="/admin/analysis"
+                        >
+                            <i className="bi bi-bar-chart user-profile-dropdown__icon" />
+                            <p className="user-profile-dropdown__link">
+                                Analysis
+                            </p>
+                        </Link>
+                    </>
                 )}
 
                 <Link

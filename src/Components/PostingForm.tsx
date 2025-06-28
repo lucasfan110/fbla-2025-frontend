@@ -17,7 +17,7 @@ interface Props {
 
 export default function PostingForm({
     onFormSubmit,
-    initialFormData = { name: "", schools: [] },
+    initialFormData = { name: "", schools: [], hourlySalary: 0 },
     submitButtonLabel = "Add Posting",
 }: Props) {
     const [formData, setFormData] =
@@ -78,6 +78,22 @@ export default function PostingForm({
                     })
                 }
                 required
+            />
+
+            <FormInput
+                label="Hourly Salary ($/hr)"
+                placeholder="Hourly Salary ($/hr)"
+                id="hourly-salary"
+                className="posting-form__form-input"
+                value={formData.hourlySalary ?? 0}
+                min={0}
+                onChange={e => {
+                    setFormData({
+                        ...formData,
+                        hourlySalary: e.target.valueAsNumber,
+                    });
+                }}
+                type="number"
             />
 
             <FormTextArea

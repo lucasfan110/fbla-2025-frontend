@@ -1,0 +1,26 @@
+@use "../sass/abstracts/variables";
+
+.faq-card {
+    cursor: pointer;
+    margin: 1rem 0;
+
+    &__question {
+        font-weight: bold;
+        border-top: 1px solid variables.$color-black;
+        border-bottom: 1px solid variables.$color-black;
+        padding: 2rem;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__answer {
+        // padding: 3rem;
+        display: none;
+    }
+
+    &--opened {
+        .faq-card__answer {
+            display: initial;
+        }
+    }
+}

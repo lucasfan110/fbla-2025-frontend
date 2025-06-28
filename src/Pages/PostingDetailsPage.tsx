@@ -15,6 +15,8 @@ import getAuthToken from "../utils/getAuthToken";
 import NotificationButton from "./NotificationButton";
 import "./PostingDetailsPage.scss";
 import Section from "./Section";
+import useUserLocation from "../hooks/useUserLocation";
+import { convertDistance, getDistance } from "geolib";
 
 export default function PostingDetailsPage() {
     const { postingId = "" } = useParams();
@@ -23,9 +25,13 @@ export default function PostingDetailsPage() {
     const postingApplicationContainerRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
     const { openEditPostingWindow } = useContext(EditPostingWindowContext);
+    const { userCoords } = useUserLocation();
 
     const mapContainer = useRef<HTMLDivElement>(null);
-    useMapDisplay(mapContainer, posting?.location);
+    useMapDisplay(mapContainer, [
+        posting?.coordinates.longitude ?? 0,
+        posting?.coordinates.latitude ?? 0,
+    ]);
 
     async function updatePostingStatus(status: Status) {
         const res = await backend.patch(
@@ -54,7 +60,16 @@ export default function PostingDetailsPage() {
         return null;
     }
 
-    const { image, name, resources, tags, description, location } = posting;
+    const {
+        image,
+        name,
+        resources,
+        tags,
+        description,
+        location,
+        hourlySalary,
+        coordinates,
+    } = posting;
 
     function renderResources() {
         return resources?.map((resource, index) => (
@@ -103,6 +118,11 @@ export default function PostingDetailsPage() {
                 </div>
                 <Tags tags={tags} className="posting-details-page__tags" />
 
+                <div className="posting-details-page__section posting-details-page__hourly-salary">
+                    <strong>Salary: </strong>
+                    {hourlySalary ? `$${hourlySalary}/hr` : "Unpaid"}
+                </div>
+
                 <p className="posting-details-page__section posting-details-page__description">
                     {description}
                 </p>
@@ -129,7 +149,14 @@ export default function PostingDetailsPage() {
                 </h3>
                 <Section>
                     <p className="posting-details-page__content posting-details-page__location">
-                        {location}
+                        {location}{" "}
+                        {userCoords &&
+                            `(${Math.round(
+                                convertDistance(
+                                    getDistance(userCoords, coordinates),
+                                    "mi"
+                                )
+                            )} miles)`}
                     </p>
                     <div
                         ref={mapContainer}
@@ -148,7 +175,7 @@ export default function PostingDetailsPage() {
                     </div>
                 </Section>
 
-                {user.role === "admin" && (
+                {user.role === "admin" && posting.status === "pending" && (
                     <AcceptOrReject onClick={handleStatusButtonClick} />
                 )}
 

@@ -14,6 +14,21 @@ interface Posting {
     applications: string[];
     status: Status;
     applicationCount: number;
+    createdAt: string;
+    hourlySalary?: number;
+    coordinates: {
+        latitude: number;
+        longitude: number;
+    };
+}
+
+export function postingsAreEqual(
+    postingArr1: Posting[],
+    postingArr2: Posting[]
+): boolean {
+    return postingArr1.every(
+        (value, index) => value._id === postingArr2[index]._id
+    );
 }
 
 export default Posting;

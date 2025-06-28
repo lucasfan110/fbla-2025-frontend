@@ -23,6 +23,7 @@ import PostingApplicationsPage from "./pages/PostingApplicationsPage.tsx";
 import PostingDetailsPage from "./pages/PostingDetailsPage.tsx";
 import StudentManagementPage from "./pages/StudentManagementPage.tsx";
 import ValidateUser from "./pages/ValidateUser.tsx";
+import AdminAnalysisPage from "./pages/AdminAnalysisPage.tsx";
 
 mapboxgl.accessToken =
     "pk.eyJ1IjoibHVjYXNmYW4iLCJhIjoiY203bGlzeDBjMGJyeDJrcHRzOWFtMmVrciJ9.ispn4TNP3afN0jFC4npUEg";
@@ -59,14 +60,7 @@ const router = createHashRouter(
                 <Route
                     path="/employer"
                     element={<ValidateUser userRole="employer" />}
-                >
-                    {/* <Route element={<ContainerLayout />}>
-                        <Route
-                            path="new-posting"
-                            element={<NewPostingPage />}
-                        />
-                    </Route> */}
-                </Route>
+                ></Route>
 
                 <Route
                     path="/admin"
@@ -76,6 +70,10 @@ const router = createHashRouter(
                         <Route
                             path="student-management"
                             element={<StudentManagementPage />}
+                        />
+                        <Route
+                            path="analysis"
+                            element={<AdminAnalysisPage />}
                         />
                     </Route>
                 </Route>

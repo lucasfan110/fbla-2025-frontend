@@ -1,17 +1,31 @@
 import { useEffect, useRef, useState } from "react";
 import backend from "../../api/backend";
-import Input from "../../components/Input";
 import PostingCardList from "../../components/PostingCardList";
-import { useAuthVerified } from "../../hooks/useAuth";
-import Posting from "../../types/Posting";
+import SearchInput from "../../components/SearchInput";
+import { useAuthWithSchool } from "../../hooks/useAuth";
+import Posting, { postingsAreEqual } from "../../types/Posting";
 import getAuthToken from "../../utils/getAuthToken";
+import { highlightMatchedParts, search } from "../../utils/searchHelper";
 import "./StudentDashboard.scss";
+import SortMenu from "../../components/SortMenu";
+import {
+    readSortMenuValue,
+    saveSortMenuValue,
+    SORT_MENU_DEFAULT,
+    SortMenuType,
+} from "../../types/SortMenu";
+import useUserLocation from "../../hooks/useUserLocation";
+import { getDistance } from "geolib";
 
 export default function StudentDashboard() {
     const allPostings = useRef<Posting[]>([]);
     const [displayedPostings, setDisplayedPostings] = useState<Posting[]>([]);
     const [query, setQuery] = useState("");
-    const { user } = useAuthVerified();
+    const { user, school } = useAuthWithSchool();
+    const [sortMenuValue, setSortMenuValue] = useState<SortMenuType>(
+        readSortMenuValue() ?? SORT_MENU_DEFAULT
+    );
+    const { userCoords, error } = useUserLocation();
 
     useEffect(() => {
         (async () => {
@@ -38,6 +52,101 @@ export default function StudentDashboard() {
         }
     }, [query]);
 
+    useEffect(() => {
+        const displayedPostingsClone = [...displayedPostings];
+
+        switch (sortMenuValue.sortBy) {
+            case "recentlyCreated": {
+                if (sortMenuValue.direction === "ascending") {
+                    displayedPostingsClone.sort(
+                        (a, b) =>
+                            new Date(b.createdAt).getTime() -
+                            new Date(a.createdAt).getTime()
+                    );
+                } else {
+                    displayedPostingsClone.sort(
+                        (a, b) =>
+                            new Date(a.createdAt).getTime() -
+                            new Date(b.createdAt).getTime()
+                    );
+                }
+                break;
+            }
+            case "companyName": {
+                if (sortMenuValue.direction === "ascending") {
+                    displayedPostingsClone.sort((a, b) =>
+                        a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+                    );
+                } else {
+                    displayedPostingsClone.sort((a, b) =>
+                        b.name.toLowerCase().localeCompare(a.name.toLowerCase())
+                    );
+                }
+                break;
+            }
+            case "hourlySalary": {
+                // const unpaidPostings: Posting[] = [];
+                // const paidPostings: Posting[] = [];
+
+                // for (const posting of displayedPostingsClone) {
+                //     if (!posting.hourlySalary) {
+                //         unpaidPostings.push(posting);
+                //     } else {
+                //         paidPostings.push(posting);
+                //     }
+                // }
+                // displayedPostingsClone = [...paidPostings, ...unpaidPostings];
+
+                if (sortMenuValue.direction === "ascending") {
+                    displayedPostings.sort(
+                        (a, b) => (a.hourlySalary ?? 0) - (b.hourlySalary ?? 0)
+                    );
+                } else {
+                    displayedPostings.sort(
+                        (a, b) => (b.hourlySalary ?? 0) - (a.hourlySalary ?? 0)
+                    );
+                }
+
+                break;
+            }
+            case "distance": {
+                if (!userCoords) {
+                    return;
+                }
+
+                if (error) {
+                    alert(
+                        "Cannot sort by distance! Make sure location permission is allowed!"
+                    );
+                    return;
+                }
+
+                if (sortMenuValue.direction === "ascending") {
+                    displayedPostingsClone.sort(
+                        (a, b) =>
+                            getDistance(userCoords, a.coordinates) -
+                            getDistance(userCoords, b.coordinates)
+                    );
+                } else {
+                    displayedPostingsClone.sort(
+                        (a, b) =>
+                            getDistance(userCoords, b.coordinates) -
+                            getDistance(userCoords, a.coordinates)
+                    );
+                }
+
+                break;
+            }
+        }
+
+        if (postingsAreEqual(displayedPostingsClone, displayedPostings)) {
+            return;
+        }
+
+        setDisplayedPostings(displayedPostingsClone);
+        saveSortMenuValue(sortMenuValue);
+    }, [sortMenuValue, displayedPostings, error, userCoords]);
+
     async function onSearchInputSubmit(
         event: React.FormEvent<HTMLFormElement>
     ) {
@@ -49,64 +158,51 @@ export default function StudentDashboard() {
 
         const trimmedQuery = query.trim();
 
-        const queriedPostings: Posting[] = (
-            await backend.get(`/users/${user._id}/postings/search`, {
-                params: {
-                    q: trimmedQuery,
-                },
-                headers: {
-                    Authorization: getAuthToken(),
-                },
-            })
-        ).data.data;
-
-        const postingsToRender = queriedPostings.map(posting => {
-            const regex = new RegExp(trimmedQuery, "ig");
-            const newName = posting.name.replace(regex, value => {
-                return `<strong>${value}</strong>`;
-            });
-            const newDescription = posting.description?.replace(
-                regex,
-                value => {
-                    return `<strong>${value}</strong>`;
-                }
-            );
-            const newTags = posting.tags?.map(tag => {
-                return tag.replace(regex, value => {
-                    return `<strong>${value}</strong>`;
-                });
-            });
-
-            return {
-                ...posting,
-                name: newName,
-                tags: newTags,
-                description: newDescription,
-            };
+        const queriedPostings = await search(user._id, trimmedQuery, {
+            schools: user.school,
+            status: "approved",
         });
+        const postingsToRender = highlightMatchedParts(
+            queriedPostings,
+            trimmedQuery
+        );
 
         setDisplayedPostings(postingsToRender);
     }
 
     return (
         <div className="student-dashboard">
-            <h2 style={{ textAlign: "center" }}>Student Dashboard</h2>
+            <h1 className="u-text-center">Student Dashboard</h1>
+            <h3 className="u-text-center u-gray-text">{school?.name}</h3>
+
             <div className="student-dashboard__heading">
                 <h2>Postings to Apply For</h2>
             </div>
 
-            <form
-                className="student-dashboard__search-input-container"
-                onSubmit={onSearchInputSubmit}
-            >
-                <i className="bi bi-search" />
-                <Input
-                    className="student-dashboard__search-input"
-                    placeholder="Search for postings..."
+            <div className="student-dashboard__search-input-container">
+                <SearchInput
                     value={query}
                     onChange={e => setQuery(e.target.value)}
+                    onSearchInputSubmit={onSearchInputSubmit}
                 />
-            </form>
+                <SortMenu
+                    sortMenuValue={sortMenuValue}
+                    setSortMenuValue={setSortMenuValue}
+                />
+            </div>
+
+            {(() => {
+                if (allPostings.current.length === 0) {
+                    return (
+                        <p className="u-gray-text">
+                            There are no postings available to apply in your
+                            school! Wait for an employer to post a job posting!
+                        </p>
+                    );
+                } else if (displayedPostings.length === 0) {
+                    return <p className="u-gray-text">No posting found!</p>;
+                }
+            })()}
 
             <PostingCardList
                 postingsList={displayedPostings}

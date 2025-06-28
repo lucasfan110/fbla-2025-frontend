@@ -1,10 +1,28 @@
 @use "../sass/abstracts/mixins";
+@use "../sass/abstracts/variables";
 
 .posting-application-card {
     @include mixins.card;
+    background-color: variables.$color-white;
+
+    &__ai-result {
+        margin: 2rem 0;
+    }
 
     &__contact-info {
         display: flex;
         gap: 2rem;
     }
+}
+
+.posting-applications-page > .ai-ranked:first-child {
+    background-color: gold;
+}
+
+.posting-applications-page > .ai-ranked:nth-child(2) {
+    background-color: silver;
+}
+
+.posting-applications-page > .ai-ranked:nth-child(3) {
+    background-color: #cd7f32;
 }

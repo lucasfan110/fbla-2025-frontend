@@ -1,8 +1,10 @@
+import { convertDistance, getDistance } from "geolib";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import sanitizeHTML from "sanitize-html";
 import { EditPostingWindowContext } from "../contexts/EditPostingWindowContext";
 import { useAuthVerified } from "../hooks/useAuth";
+import useUserLocation from "../hooks/useUserLocation";
 import Posting from "../types/Posting";
 import * as PostingHelper from "../utils/postingsHelper";
 import Button from "./Button";
@@ -29,10 +31,13 @@ export default function PostingCard({
     showStatus = true,
     readOnly = false,
     showApplicationCount = false,
+    hourlySalary,
+    coordinates,
 }: Props) {
     const navigate = useNavigate();
     const { user } = useAuthVerified();
     const { openEditPostingWindow } = useContext(EditPostingWindowContext);
+    const { userCoords } = useUserLocation();
 
     return (
         <div
@@ -101,7 +106,16 @@ export default function PostingCard({
                         )}
                     </div>
                 </div>
-                <div className="posting-card__location">{location}</div>
+                <div className="posting-card__location">
+                    {location}{" "}
+                    {userCoords &&
+                        `(${Math.round(
+                            convertDistance(
+                                getDistance(userCoords, coordinates),
+                                "mi"
+                            )
+                        )} miles)`}
+                </div>
                 {/* <div className="posting-card__contact-info">
                     <div className="posting-card__phone-number">
                         <i className="bi bi-telephone" />
@@ -114,6 +128,10 @@ export default function PostingCard({
                         {email}
                     </div>
                 </div> */}
+                <div className="posting-card__hourly-salary">
+                    <strong>Salary: </strong>
+                    {hourlySalary ? `$${hourlySalary}/hr` : "Unpaid"}
+                </div>
                 <div
                     className="posting-card__summary"
                     dangerouslySetInnerHTML={{

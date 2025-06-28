@@ -39,6 +39,7 @@
         box-sizing: border-box;
         padding: 2rem 2rem;
         width: 80rem;
+        background-color: variables.$color-white;
     }
 
     &__name-container {
@@ -73,13 +74,13 @@
 
     &__summary {
         font-size: variables.$font-size-small;
-        margin-top: 1rem;
+        margin-top: 3px;
         overflow: hidden;
         display: -webkit-box;
-        line-clamp: 4;
-        -webkit-line-clamp: 4;
+        line-clamp: 3;
+        -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
-        height: 10rem;
+        height: 7.6rem;
     }
 
     &__title-container {
@@ -113,6 +114,11 @@
         display: flex;
         gap: 1rem;
         align-items: center;
+    }
+
+    &__hourly-salary {
+        font-size: variables.$font-size-small;
+        margin-top: 3px;
     }
 }
 

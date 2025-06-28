@@ -1,31 +1,8 @@
-import axios from "axios";
 import mapboxgl from "mapbox-gl";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const ZOOM = 16;
 const PITCH = 40;
-
-function getMapboxRequestURL(searchParam: string): string {
-    const uriEncoded = encodeURIComponent(searchParam);
-
-    return `https://api.mapbox.com/geocoding/v5/mapbox.places/${uriEncoded}.json?proximity=ip`;
-}
-
-async function getCoordsFromAddress(
-    address: string
-): Promise<[number, number]> {
-    const requestURL = getMapboxRequestURL(address);
-
-    const res = await axios.get(requestURL, {
-        params: {
-            access_token:
-                "pk.eyJ1IjoibHVjYXNmYW4iLCJhIjoiY203bGlzeDBjMGJyeDJrcHRzOWFtMmVrciJ9.ispn4TNP3afN0jFC4npUEg",
-        },
-    });
-
-    const [lng, lat] = res.data.features[0].geometry.coordinates;
-    return [lng, lat];
-}
 
 function add3DLayer(map: mapboxgl.Map) {
     map.on("style.load", () => {
@@ -81,20 +58,20 @@ function add3DLayer(map: mapboxgl.Map) {
 
 export default function useMapDisplay(
     container: React.RefObject<HTMLElement>,
-    location?: string
+    coord?: [number, number]
 ) {
     const map = useRef<mapboxgl.Map | null>(null);
-    const [coord, setCoord] = useState<[number, number] | null>(null);
+    // const [coord, setCoord] = useState<[number, number] | null>(null);
 
-    useEffect(() => {
-        (async () => {
-            if (!location) {
-                return;
-            }
+    // useEffect(() => {
+    //     (async () => {
+    //         if (!location) {
+    //             return;
+    //         }
 
-            setCoord(await getCoordsFromAddress(location));
-        })();
-    }, [location]);
+    //         setCoord(await getCoordsFromAddress(location));
+    //     })();
+    // }, [location]);
 
     useEffect(() => {
         if (map.current || !container.current || !coord) return; // initialize map only once

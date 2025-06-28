@@ -7,9 +7,13 @@ const ANIMATION_INTERVAL = 700;
 
 interface Props {
     animated?: boolean;
+    customText?: string;
 }
 
-export default function LoadingText({ animated = false }: Props) {
+export default function LoadingText({
+    animated = true,
+    customText = "Loading",
+}: Props) {
     const [dots, setDots] = useState("...");
 
     useEffect(() => {
@@ -28,7 +32,8 @@ export default function LoadingText({ animated = false }: Props) {
 
     return (
         <div className="u-gray-text" style={{ textAlign: "center" }}>
-            Loading{dots}
+            {customText}
+            {dots}
         </div>
     );
 }

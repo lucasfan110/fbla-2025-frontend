@@ -4,7 +4,7 @@ import Posting from "../types/Posting";
 import getAuthToken from "../utils/getAuthToken";
 import { useAuthVerified } from "./useAuth";
 
-export default function usePostingsFromUserSchool(extraParams: object) {
+export default function usePostingsFromUserSchool(extraParams: object = {}) {
     const { user } = useAuthVerified();
 
     const [postings, setPostings] = useState<Posting[]>([]);

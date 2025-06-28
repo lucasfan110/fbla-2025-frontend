@@ -1,0 +1,14 @@
+@use "../sass/abstracts/mixins";
+@use "../sass/abstracts/variables";
+
+.admin-analysis-page {
+    &__graph-container {
+        @include mixins.container;
+
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        background-color: variables.$color-white;
+    }
+}

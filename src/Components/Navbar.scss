@@ -2,10 +2,13 @@
 @use "../sass/abstracts/variables";
 
 .navbar {
-    @include mixins.container;
+    width: 100%;
+    background-color: variables.$color-white;
 
-    display: flex;
-    margin-top: 1rem;
+    &__container {
+        @include mixins.container;
+        display: flex;
+    }
 
     &__item {
         display: flex;
@@ -16,6 +19,9 @@
     &__logo-btn {
         // padding: 3px 1.5rem;
         padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     &__justify-left {
@@ -28,9 +34,10 @@
         transition: all 0.4s;
         padding: 8px 2rem;
         border-radius: 5px;
+        width: 8rem;
 
         &:hover {
-            background-color: variables.$color-primary;
+            background-color: variables.$color-secondary;
             color: variables.$color-white;
         }
     }
@@ -43,7 +50,7 @@
         gap: 3rem;
         display: flex;
         justify-content: center;
-        flex: 1;
+        flex: 2;
     }
 
     &__link {
@@ -53,6 +60,8 @@
 
     &__justify-right {
         justify-content: flex-end;
+        display: flex;
+        gap: 1rem;
     }
 }
 

@@ -2,6 +2,7 @@
 
 .admin-dashboard {
     padding-bottom: 5em;
+    margin: 2rem;
 
     &__title {
         margin-top: 2rem;
@@ -9,11 +10,7 @@
     }
 
     &__subtitle {
-        margin-top: 4rem;
-    }
-
-    &__no-posting {
-        color: variables.$color-gray-3;
+        margin-top: 6rem;
     }
 }
 

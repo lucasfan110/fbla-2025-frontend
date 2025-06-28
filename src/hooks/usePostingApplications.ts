@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { SetStateAction, useEffect, useRef, useState } from "react";
 import { Application } from "../types/Application";
 import backend from "../api/backend";
 import { useAuthVerified } from "./useAuth";
@@ -7,7 +7,7 @@ import getAuthToken from "../utils/getAuthToken";
 export default function usePostingApplications(
     postingId: string,
     params?: object
-) {
+): [Application[], React.Dispatch<SetStateAction<Application[]>>] {
     const { user } = useAuthVerified();
     const [applications, setApplications] = useState<Application[]>([]);
     const postingIdRef = useRef(postingId);
@@ -31,5 +31,5 @@ export default function usePostingApplications(
         })();
     }, [user]);
 
-    return applications;
+    return [applications, setApplications];
 }

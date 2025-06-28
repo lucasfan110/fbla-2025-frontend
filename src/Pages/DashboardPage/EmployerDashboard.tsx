@@ -1,23 +1,56 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactModal from "react-modal";
 import backend from "../../api/backend";
 import Button from "../../components/Button";
 import PostingCardList from "../../components/PostingCardList";
+import SearchInput from "../../components/SearchInput";
 import modalStyle, { CLOSE_TIMEOUT_MS } from "../../constants/modalStyle";
 import { useAuthVerified } from "../../hooks/useAuth";
+import usePreventScrolling from "../../hooks/usePreventScrolling";
 import Posting from "../../types/Posting";
 import getAuthToken from "../../utils/getAuthToken";
+import { highlightMatchedParts, search } from "../../utils/searchHelper";
 import NewPostingPage from "../NewPostingPage";
 import "./EmployerDashboard.scss";
-import usePreventScrolling from "../../hooks/usePreventScrolling";
 
 export default function EmployerDashboard() {
     const { user } = useAuthVerified();
 
-    const [postings, setPostings] = useState<Posting[]>([]);
+    // const [postings, setPostings] = useState<Posting[]>([]);
+    const allPostings = useRef<Posting[]>([]);
+    const [displayedPostings, setDisplayedPostings] = useState<Posting[]>([]);
     const [showNewPostingPage, setShowNewPostingPage] = useState(false);
+    const [query, setQuery] = useState("");
 
     usePreventScrolling(showNewPostingPage);
+
+    useEffect(() => {
+        if (!query) {
+            setDisplayedPostings(allPostings.current);
+        }
+    }, [query]);
+
+    async function onSearchInputSubmit(
+        event: React.FormEvent<HTMLFormElement>
+    ) {
+        event.preventDefault();
+
+        if (!query) {
+            return;
+        }
+
+        const trimmedQuery = query.trim();
+
+        const queriedPostings = await search(user._id, trimmedQuery, {
+            owner: user._id,
+        });
+        const postingsToRender = highlightMatchedParts(
+            queriedPostings,
+            trimmedQuery
+        );
+
+        setDisplayedPostings(postingsToRender);
+    }
 
     useEffect(() => {
         (async () => {
@@ -31,7 +64,8 @@ export default function EmployerDashboard() {
             });
 
             if (res.data.status === "success") {
-                setPostings(res.data.data.postings);
+                allPostings.current = res.data.data.postings;
+                setDisplayedPostings(res.data.data.postings);
             } else {
                 alert("Failed to get postings");
             }
@@ -40,16 +74,34 @@ export default function EmployerDashboard() {
 
     return (
         <div className="employer-dashboard">
-            <h2 style={{ textAlign: "center" }}>Employer Dashboard</h2>
+            <h1 style={{ textAlign: "center" }}>Employer Dashboard</h1>
 
             <div className="employer-dashboard__title">
                 <h3>My Postings</h3>
             </div>
 
+            <SearchInput
+                onSearchInputSubmit={onSearchInputSubmit}
+                value={query}
+                onChange={e => setQuery(e.target.value)}
+            />
+
+            {(() => {
+                if (allPostings.current.length === 0) {
+                    return (
+                        <p className="u-gray-text">
+                            You don't have any postings! Click the blue "+"
+                            button at the bottom right corner to add a posting!
+                        </p>
+                    );
+                } else if (displayedPostings.length === 0) {
+                    return <p className="u-gray-text">No posting found!</p>;
+                }
+            })()}
+
             <PostingCardList
-                postingsList={postings}
+                postingsList={displayedPostings}
                 showApplicationCount
-                // onEditPosting={id => setEditPostingIndex(id)}
             />
 
             <Button

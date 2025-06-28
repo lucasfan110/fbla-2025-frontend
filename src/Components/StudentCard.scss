@@ -1,11 +1,15 @@
 @use "../sass/abstracts/variables";
+@use "../sass/abstracts/mixins";
 
 .student-card {
-    border: 1px solid variables.$color-gray-2;
+    @include mixins.card;
+
     border-radius: 2rem;
     display: flex;
     align-items: center;
     width: 100%;
+    margin: 0;
+    padding: 0;
 
     &__icon {
         font-size: 3rem;

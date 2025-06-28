@@ -100,11 +100,16 @@
     &__application-container {
         width: 100%;
         display: flex;
+        // margin-top: 1rem;
         // justify-content: center;
     }
 
     &__view-applications-btn {
         margin-top: 2rem;
+    }
+
+    &__hourly-salary {
+        margin-bottom: 2rem;
     }
 }
 
