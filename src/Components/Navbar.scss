@@ -4,6 +4,7 @@
 .navbar {
     width: 100%;
     background-color: variables.$color-white;
+    padding: 1rem 0;
 
     &__container {
         @include mixins.container;
@@ -67,7 +68,9 @@
 
 @media screen and (max-width: variables.$shrink-size) {
     .navbar {
-        margin: 0 2rem;
+        padding: 1rem;
+        margin-top: -1rem;
+        background-color: initial;
 
         &__justify-center {
             display: none;

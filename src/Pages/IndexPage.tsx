@@ -84,42 +84,44 @@ export default function IndexPage() {
                     </div>
                 </div>
             </section>
-            <section className="features-section">
-                <div className="container">
-                    <h2 className="section-title">
+            <section className="index-page__features-section">
+                <div className="index-page__features-container">
+                    <h2 className="index-page__features-title">
                         Features That Set Us Apart
                     </h2>
-                    <div className="features-grid">
-                        <div className="feature-card">
-                            <span className="icon material-icons">
+                    <div className="index-page__features-grid">
+                        <div className="index-page__feature-card">
+                            <span className="index-page__feature-icon">
                                 <i className="bi bi-map" />
                             </span>
-                            <h3 className="feature-title">
+                            <h3 className="index-page__feature-title">
                                 Interactive 3D Maps
                             </h3>
-                            <p className="feature-description">
+                            <p className="index-page__feature-description">
                                 Visualize job opportunities in your area with
                                 our cutting-edge map integration.
                             </p>
                         </div>
-                        <div className="feature-card">
-                            <span className="icon material-icons">
+                        <div className="index-page__feature-card">
+                            <span className="index-page__feature-icon">
                                 <i className="bi bi-robot" />
                             </span>
-                            <h3 className="feature-title">
+                            <h3 className="index-page__feature-title">
                                 AI-Powered Chatbot
                             </h3>
-                            <p className="feature-description">
+                            <p className="index-page__feature-description">
                                 Get instant assistance and guidance throughout
                                 your job search or hiring process.
                             </p>
                         </div>
-                        <div className="feature-card">
-                            <span className="icon material-icons">
+                        <div className="index-page__feature-card">
+                            <span className="index-page__feature-icon">
                                 <i className="bi bi-box-arrow-in-right" />
                             </span>
-                            <h3 className="feature-title">Seamless Sign-In</h3>
-                            <p className="feature-description">
+                            <h3 className="index-page__feature-title">
+                                Seamless Sign-In
+                            </h3>
+                            <p className="index-page__feature-description">
                                 Enjoy secure and easy access with Google OAuth
                                 integration for one-click sign-ins.
                             </p>

@@ -6,8 +6,8 @@
         @include mixins.container;
 
         display: flex;
-        align-items: center;
-        flex-direction: column;
+        justify-content: center;
+        flex-wrap: wrap;
 
         background-color: variables.$color-white;
     }

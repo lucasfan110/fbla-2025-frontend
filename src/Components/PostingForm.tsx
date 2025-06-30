@@ -90,7 +90,7 @@ export default function PostingForm({
                 onChange={e => {
                     setFormData({
                         ...formData,
-                        hourlySalary: e.target.valueAsNumber,
+                        hourlySalary: e.target.valueAsNumber || 0,
                     });
                 }}
                 type="number"

@@ -24,6 +24,7 @@ export default function EditPostingPage({ posting }: Props) {
             location: posting.location,
             resources: posting.resources,
             tags: posting.tags,
+            hourlySalary: posting.hourlySalary,
         };
     }
 

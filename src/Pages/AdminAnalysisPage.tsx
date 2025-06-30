@@ -26,8 +26,6 @@ export default function AdminAnalysisPage() {
     const maxY = Math.max(...Object.values(sortedTagEntires).map(v => v[1]));
     const tickVals = Array.from({ length: maxY + 1 }, (_, i) => i); // [0, 1, 2]
 
-    console.log(sortedTagEntires);
-
     return (
         <div className="admin-analysis-page">
             <div className="admin-analysis-page__graph-container">
@@ -48,6 +46,7 @@ export default function AdminAnalysisPage() {
                     ]}
                     layout={{
                         title: { text: "Posting Status Distribution" },
+                        width: 400,
                     }}
                 />
 
@@ -62,6 +61,7 @@ export default function AdminAnalysisPage() {
                     layout={{
                         title: { text: "Most Common Tags" },
                         yaxis: { tickformat: ",d", tickvals: tickVals },
+                        width: 400,
                     }}
                 />
             </div>

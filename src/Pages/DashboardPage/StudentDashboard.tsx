@@ -85,18 +85,6 @@ export default function StudentDashboard() {
                 break;
             }
             case "hourlySalary": {
-                // const unpaidPostings: Posting[] = [];
-                // const paidPostings: Posting[] = [];
-
-                // for (const posting of displayedPostingsClone) {
-                //     if (!posting.hourlySalary) {
-                //         unpaidPostings.push(posting);
-                //     } else {
-                //         paidPostings.push(posting);
-                //     }
-                // }
-                // displayedPostingsClone = [...paidPostings, ...unpaidPostings];
-
                 if (sortMenuValue.direction === "ascending") {
                     displayedPostings.sort(
                         (a, b) => (a.hourlySalary ?? 0) - (b.hourlySalary ?? 0)
